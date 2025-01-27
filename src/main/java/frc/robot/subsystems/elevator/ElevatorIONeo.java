@@ -23,7 +23,7 @@ import edu.wpi.first.math.util.Units;
 /** Add your docs here. */
 public class ElevatorIONeo implements ElevatorIO{
     //4:1 gearbox
-    private final SparkMax neo = new SparkMax(0, MotorType.kBrushless);
+    private final SparkMax neo = new SparkMax(0, MotorType.kBrushless); //TODO Set device ID
     private final SparkMaxConfig config = new SparkMaxConfig();
     private final RelativeEncoder encoder = neo.getEncoder();
 
@@ -44,8 +44,8 @@ public class ElevatorIONeo implements ElevatorIO{
         
         config.closedLoop
             .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-            .pid(1.0, 0.0, 0)
-            .outputRange(-1, 1);
+            .pid(1.0, 0.0, 0) //TODO Tune and change PID values
+            .outputRange(-1, 1); //TODO Change output range to fit gear ratio
         
         neo.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     }

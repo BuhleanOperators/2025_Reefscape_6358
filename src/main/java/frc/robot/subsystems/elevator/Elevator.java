@@ -39,4 +39,5 @@ public class Elevator extends SubsystemBase {
     double ff = feedforward.calculate(setpointRads.position, setpointRads.velocity);
     io.setPosition(setpointRads.position, ff);
   }
+  //TODO Create and logic elevator setpoint methods for scoring L1, L2, and L3 and collect from CORAL Station
 }
