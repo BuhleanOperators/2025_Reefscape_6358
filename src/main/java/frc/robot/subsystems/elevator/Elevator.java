@@ -35,9 +35,30 @@ public class Elevator extends SubsystemBase {
     Logger.processInputs("Elevator", inputs);
   }
 
-  public void setPosition(TrapezoidProfile.State setpointRads){
+  /** Set position of elevator to specified setpoint with feedforward control */
+  private void setPosition(TrapezoidProfile.State setpointRads){
     double ff = feedforward.calculate(setpointRads.position, setpointRads.velocity);
     io.setPosition(setpointRads.position, ff);
   }
-  //TODO Create and logic elevator setpoint methods for scoring L1, L2, and L3 and collect from CORAL Station
+
+  //TODO FInd and set positions for each needed level
+  /** Set position to score L1 CORAL */
+  public void setL1Coral(){
+    setPosition(null);
+  }
+
+  /** Set position to score L2 CORAL */
+  public void setL2Coral(){
+    setPosition(null);
+  }
+
+  /** Set position to score L3 CORAL */
+  public void setL3Coral(){
+    setPosition(null);
+  }
+
+  /** Set position to colract from Coral Station */
+  public void setCoralStation(){
+    setPosition(null);
+  }
 }
