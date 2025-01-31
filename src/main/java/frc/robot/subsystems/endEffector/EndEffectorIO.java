@@ -26,19 +26,32 @@ public interface EndEffectorIO {
         public double averageVelocityRPM = 0.0;
     }
 
-    /** Updates set of loggable inputs */
+    /** Updates set of loggable inputs 
+     * @param inputs set of updatable inputs
+    */
     public default void updateInputs(EndEffectorInputs inputs){}
 
-    /** Sets velocity of both end effector motors to specified velocity*/
+    /** Sets velocity of both end effector motors to specified velocity
+     * @param velocityRPM desired velocity of the motors in rotations per minute
+    */
     public default void setVelocity(double velocityRPM){}
 
-    /** Sets velocity of specified motor to specified velocity*/
+    /** Sets velocity of specified motor to specified velocity
+     * @param isRightMotor weather or not to run the right motor
+     * @param velocityRPM deired velocity of the motor in rotations per minute
+    */
     public default void setVelocity(boolean isRightMotor, double velocityRPM){}
 
-    /** Sets velocity of motors to specified velocities */
+    /** Sets velocity of motors to specified velocities 
+     * <p>Motors rotate in oposite directions on defalut.</p>
+     * @param leftVelocityRPM deired velocity of the left motor in rotations per minute
+     * @param rightVelocityRPM deired velocity of the right motor in rotations per minute
+    */
     public default void setVelocity(double leftVelocityRPM, double rightVelocityRPM){}
 
-    /** Set break mode enabled */
+    /** Set break mode enabled 
+     * @param enable desired enabled state of break mode for both motors
+    */
     public default void setBreakMode(boolean enable){}
 
     /** Stops both motors */
