@@ -29,6 +29,12 @@ import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.subsystems.elevator.ElevatorIO;
+import frc.robot.subsystems.elevator.ElevatorIONeo;
+
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -40,6 +46,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final Elevator elevator;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -60,6 +67,8 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
+        elevator =
+            new Elevator(new ElevatorIONeo());
         break;
 
       default:
@@ -71,6 +80,8 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        elevator = 
+            new Elevator(new ElevatorIO() {});
         break;
     }
 
@@ -136,6 +147,42 @@ public class RobotContainer {
                     drive)
                 .ignoringDisable(true));
     
+    //Manual control of the Elevator
+    coPilot
+        .rightBumper()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setSpeed(0.5), elevator))
+        .onFalse(
+            Commands.run(
+                () -> 
+                    elevator.stop(), elevator));
+    coPilot
+        .a()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setL1Coral(), elevator)); //8
+    coPilot
+        .b()
+        .onTrue(
+            Commands.run(
+                () ->
+                    elevator.setL2Coral(), elevator)); //0
+    coPilot
+        .x()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setL3Coral(), elevator)); //16
+    coPilot
+        .y()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setCoralStation(), elevator)); //20
+
   }
 
   /**
