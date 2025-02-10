@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.endEffector;
+package frc.robot.subsystems.coral;
 
 import org.littletonrobotics.junction.Logger;
 
@@ -10,21 +10,21 @@ import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class EndEffector extends SubsystemBase {
-  private final EndEffectorIO io;
-  private final EndEffectorInputsAutoLogged inputs = new EndEffectorInputsAutoLogged();
+public class Coral extends SubsystemBase {
+  private final CoralIO io;
+  private final CoralInputsAutoLogged inputs = new CoralInputsAutoLogged();
   
   private final Alert leftMotorDisconnected;
   private final Alert rightMotorDisconnected;
 
-  public EndEffector(EndEffectorIO io) {
+  public Coral(CoralIO io) {
     this.io = io;
     io.setBreakMode(false);
 
     io.updateInputs(inputs);
 
-    leftMotorDisconnected = new Alert("Left end effector motor disconnected. System may not function properly.", AlertType.kError);
-    rightMotorDisconnected = new Alert("Right end effector motor disconnected. System my not function properly.", AlertType.kError);
+    leftMotorDisconnected = new Alert("Left coral motor disconnected. System may not function properly.", AlertType.kError);
+    rightMotorDisconnected = new Alert("Right coral motor disconnected. System my not function properly.", AlertType.kError);
 
     leftMotorDisconnected.set(!inputs.leftIsConnected);
     rightMotorDisconnected.set(!inputs.rightIsConnected);
@@ -33,7 +33,7 @@ public class EndEffector extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    Logger.processInputs("End Effector", inputs);
+    Logger.processInputs("Coral", inputs);
   }
 
   /** Run motors to score L2 and L3 CORAL */

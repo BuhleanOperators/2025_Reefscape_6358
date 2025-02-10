@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.endEffector;
+package frc.robot.subsystems.coral;
 
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -18,7 +18,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.filter.Debouncer;
 
-public class EndEffectorIONeo550 implements EndEffectorIO{
+public class CoralIONeo550 implements CoralIO{
     private SparkMax leftNeo550 = new SparkMax(8, MotorType.kBrushless); //TODO Change motor IDs
     private SparkMax rightNeo550 = new SparkMax(7, MotorType.kBrushless);
 
@@ -34,7 +34,7 @@ public class EndEffectorIONeo550 implements EndEffectorIO{
     private Debouncer leftConnectedDebouncer;
     private Debouncer rightConnectedDebouncer;
 
-    public EndEffectorIONeo550(){
+    public CoralIONeo550(){
         leftConfig
             .inverted(true)
             .idleMode(IdleMode.kBrake)
@@ -69,7 +69,7 @@ public class EndEffectorIONeo550 implements EndEffectorIO{
     }
 
     @Override
-    public void updateInputs(EndEffectorInputs inputs){
+    public void updateInputs(CoralInputs inputs){
         inputs.leftIsConnected = leftConnectedDebouncer.calculate(leftNeo550.getLastError() == REVLibError.kOk);
         inputs.rightIsConnected = rightConnectedDebouncer.calculate(rightNeo550.getLastError() == REVLibError.kOk);
 

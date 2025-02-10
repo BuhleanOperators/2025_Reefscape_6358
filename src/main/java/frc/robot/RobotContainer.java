@@ -24,14 +24,17 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.algae.Algae;
+import frc.robot.subsystems.algae.AlgaeIO;
+import frc.robot.subsystems.algae.AlgaeIONeo550;
+import frc.robot.subsystems.coral.Coral;
+import frc.robot.subsystems.coral.CoralIO;
+import frc.robot.subsystems.coral.CoralIONeo550;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
-import frc.robot.subsystems.endEffector.EndEffector;
-import frc.robot.subsystems.endEffector.EndEffectorIO;
-import frc.robot.subsystems.endEffector.EndEffectorIONeo550;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -44,7 +47,8 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
-  private final EndEffector endEffector;
+  private final Coral coral;
+  private final Algae algae;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -65,8 +69,10 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
-        endEffector = 
-            new EndEffector(new EndEffectorIONeo550());
+        coral = 
+            new Coral(new CoralIONeo550());
+        algae = 
+            new Algae(new AlgaeIONeo550());
         break;
 
       default:
@@ -78,9 +84,10 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
-        endEffector =
-            new EndEffector(
-                new EndEffectorIO() {});
+        coral =
+            new Coral(new CoralIO() {});
+        algae = 
+            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -150,7 +157,13 @@ public class RobotContainer {
         .leftBumper()
         .whileTrue(
             Commands.startEnd(
-                () -> endEffector.scoreCoral(), endEffector::stop, endEffector));
+                () -> coral.scoreCoral(), coral::stop, coral));
+
+    xDriver
+        .rightBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> algae.grabAlgae(), algae::stop, algae));
     
   }
 

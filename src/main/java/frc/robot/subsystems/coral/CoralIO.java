@@ -2,14 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.endEffector;
+package frc.robot.subsystems.coral;
 
 import org.littletonrobotics.junction.AutoLog;
 
 /** Add your docs here. */
-public interface EndEffectorIO {
+public interface CoralIO {
     @AutoLog
-    public static class EndEffectorInputs{
+    public static class CoralInputs{
         public boolean leftIsConnected = false;
         public boolean rightIsConnected = false;
 
@@ -29,7 +29,7 @@ public interface EndEffectorIO {
     /** Updates set of loggable inputs 
      * @param inputs set of updatable inputs
     */
-    public default void updateInputs(EndEffectorInputs inputs){}
+    public default void updateInputs(CoralInputs inputs){}
 
     /** Sets velocity of both end effector motors to specified velocity
      * <p>Motors rotate in opposite directions</p>
