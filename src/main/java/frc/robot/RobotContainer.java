@@ -29,6 +29,10 @@ import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.endEffector.EndEffector;
+import frc.robot.subsystems.endEffector.EndEffectorIO;
+import frc.robot.subsystems.endEffector.EndEffectorIONeo550;
+
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -40,6 +44,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final EndEffector endEffector;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -60,6 +65,8 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
+        endEffector = 
+            new EndEffector(new EndEffectorIONeo550());
         break;
 
       default:
@@ -71,6 +78,9 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        endEffector =
+            new EndEffector(
+                new EndEffectorIO() {});
         break;
     }
 
@@ -135,6 +145,12 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
+    
+    xDriver
+        .leftBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> endEffector.scoreCoral(), endEffector::stop, endEffector));
     
   }
 

@@ -38,7 +38,8 @@ public class EndEffector extends SubsystemBase {
 
   /** Run motors to score L2 and L3 CORAL */
   public void scoreCoral(){
-    io.setVelocity(0); //TODO Find and set velocity needed to score L2 and L3
+    // io.setVelocity(3850); //TODO Find and set velocity needed to score L2 and L3
+    io.setSpeed(0.35);
     //? Are L2 and L3 velocities the same?
   }
 

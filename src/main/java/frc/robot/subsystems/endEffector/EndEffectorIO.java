@@ -32,6 +32,7 @@ public interface EndEffectorIO {
     public default void updateInputs(EndEffectorInputs inputs){}
 
     /** Sets velocity of both end effector motors to specified velocity
+     * <p>Motors rotate in opposite directions</p>
      * @param velocityRPM desired velocity of the motors in rotations per minute
     */
     public default void setVelocity(double velocityRPM){}
@@ -48,6 +49,12 @@ public interface EndEffectorIO {
      * @param rightVelocityRPM deired velocity of the right motor in rotations per minute
     */
     public default void setVelocity(double leftVelocityRPM, double rightVelocityRPM){}
+
+    /** Sets the speed of the motors to specified percent
+     * <p>Motors spin in oppoisite directions
+     * @param speed Desired speed of the motors (1 to -1)
+     */
+    public default void setSpeed(double speed){}
 
     /** Set break mode enabled 
      * @param enable desired enabled state of break mode for both motors

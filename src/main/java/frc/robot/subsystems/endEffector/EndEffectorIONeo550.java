@@ -19,8 +19,8 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.math.filter.Debouncer;
 
 public class EndEffectorIONeo550 implements EndEffectorIO{
-    private SparkMax leftNeo550 = new SparkMax(0, MotorType.kBrushless); //TODO Change motor IDs
-    private SparkMax rightNeo550 = new SparkMax(0, MotorType.kBrushless);
+    private SparkMax leftNeo550 = new SparkMax(8, MotorType.kBrushless); //TODO Change motor IDs
+    private SparkMax rightNeo550 = new SparkMax(7, MotorType.kBrushless);
 
     private SparkMaxConfig leftConfig = new SparkMaxConfig();
     private SparkMaxConfig rightConfig = new SparkMaxConfig();
@@ -36,7 +36,7 @@ public class EndEffectorIONeo550 implements EndEffectorIO{
 
     public EndEffectorIONeo550(){
         leftConfig
-            .inverted(false)
+            .inverted(true)
             .idleMode(IdleMode.kBrake)
             .smartCurrentLimit(20)
             .voltageCompensation(12.0);
@@ -106,6 +106,12 @@ public class EndEffectorIONeo550 implements EndEffectorIO{
     public void setVelocity(double leftVelocityRPM, double rightVelocityRPM){
         leftController.setReference(leftVelocityRPM, ControlType.kVelocity);
         rightController.setReference(rightVelocityRPM, ControlType.kVelocity);
+    }
+
+    @Override
+    public void setSpeed(double speed){
+        leftNeo550.set(speed);
+        rightNeo550.set(speed);
     }
 
     @Override
