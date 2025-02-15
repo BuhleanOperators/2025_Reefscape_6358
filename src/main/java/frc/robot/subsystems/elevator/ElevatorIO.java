@@ -35,6 +35,11 @@ public interface ElevatorIO {
      */
     public default void setPosition(ExponentialProfile.State desiredState){}
 
+    /** Run motor to specified position with open loop
+     * @param output desired hight of the elevator in inches
+     */
+    public default void setPosition(double output){}
+
     /** Run motor at specified voltage 
      * @param outputVolts deired voltage to run the motor
      */

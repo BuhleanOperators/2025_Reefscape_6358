@@ -33,8 +33,6 @@ import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIONeo;
 
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
