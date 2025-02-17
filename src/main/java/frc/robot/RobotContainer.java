@@ -24,11 +24,15 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.coral.Coral;
+import frc.robot.subsystems.coral.CoralIO;
+import frc.robot.subsystems.coral.CoralIONeo550;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -40,6 +44,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final Coral coral;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -60,6 +65,8 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
+        coral = 
+            new Coral(new CoralIONeo550());
         break;
 
       default:
@@ -71,6 +78,8 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        coral =
+            new Coral(new CoralIO() {});
         break;
     }
 
@@ -135,7 +144,11 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-    
+    xDriver
+        .leftBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> coral.scoreCoral(), coral::stop, coral));
   }
 
   /**
