@@ -24,9 +24,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.algae.Algae;
-import frc.robot.subsystems.algae.AlgaeIO;
-import frc.robot.subsystems.algae.AlgaeIONeo550;
 import frc.robot.subsystems.coral.Coral;
 import frc.robot.subsystems.coral.CoralIO;
 import frc.robot.subsystems.coral.CoralIONeo550;
@@ -48,7 +45,6 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
   private final Coral coral;
-  private final Algae algae;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -71,8 +67,6 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.BackRight));
         coral = 
             new Coral(new CoralIONeo550());
-        algae = 
-            new Algae(new AlgaeIONeo550());
         break;
 
       default:
@@ -86,8 +80,6 @@ public class RobotContainer {
                 new ModuleIO() {});
         coral =
             new Coral(new CoralIO() {});
-        algae = 
-            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -158,12 +150,6 @@ public class RobotContainer {
         .whileTrue(
             Commands.startEnd(
                 () -> coral.scoreCoral(), coral::stop, coral));
-
-    xDriver
-        .rightBumper()
-        .whileTrue(
-            Commands.startEnd(
-                () -> algae.grabAlgae(), algae::stop, algae));
     
   }
 
