@@ -24,6 +24,9 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.coral.Coral;
+import frc.robot.subsystems.coral.CoralIO;
+import frc.robot.subsystems.coral.CoralIONeo550;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
@@ -44,6 +47,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final Coral coral;
   private final Elevator elevator;
 
   // Controller
@@ -65,6 +69,8 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
+        coral = 
+            new Coral(new CoralIONeo550());
         elevator =
             new Elevator(new ElevatorIONeo());
         break;
@@ -78,6 +84,8 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        coral =
+            new Coral(new CoralIO() {});
         elevator = 
             new Elevator(new ElevatorIO() {});
         break;
@@ -144,6 +152,11 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
+    xDriver
+        .leftBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> coral.scoreCoral(), coral::stop, coral));
 
     //Run elevator to hight for L1 / Coral station
     coPilot
