@@ -9,6 +9,7 @@ import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Height;
 import frc.robot.Constants.elevatorHeight;
 
 public class Elevator extends SubsystemBase {
@@ -50,5 +51,9 @@ public class Elevator extends SubsystemBase {
   /** Set position to score L3 CORAL */
   public void setL3Coral(){
     io.setPosition(elevatorHeight.L3);
+  }
+
+  public void setPosition(Height height){
+    io.setPosition(height);
   }
 }

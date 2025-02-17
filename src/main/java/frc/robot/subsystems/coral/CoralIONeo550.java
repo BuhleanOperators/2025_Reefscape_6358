@@ -115,6 +115,12 @@ public class CoralIONeo550 implements CoralIO{
     }
 
     @Override
+    public void setSpeed(double leftSpeed, double rightSpeed){
+        leftNeo550.set(leftSpeed);
+        rightNeo550.set(rightSpeed);
+    }
+
+    @Override
     public void setBreakMode(boolean enable){
         leftConfig.idleMode(enable ? IdleMode.kBrake : IdleMode.kCoast);
         rightConfig.idleMode(enable ? IdleMode.kBrake : IdleMode.kCoast);

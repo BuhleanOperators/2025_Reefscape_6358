@@ -56,6 +56,12 @@ public interface CoralIO {
      */
     public default void setSpeed(double speed){}
 
+    /** Sets the speed of the motors to specified percent
+     * <p>Motors spin in oppoisite directions
+     * @param speed Desired speed of the motors (1 to -1)
+     */
+    public default void setSpeed(double leftSpeed, double rightSpeed){}
+
     /** Set break mode enabled 
      * @param enable desired enabled state of break mode for both motors
     */

@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.Constants.Height;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.coral.Coral;
@@ -156,7 +157,7 @@ public class RobotContainer {
         .leftBumper()
         .whileTrue(
             Commands.startEnd(
-                () -> coral.scoreCoral(), coral::stop, coral));
+                () -> coral.run(), coral::stop, coral));
 
     //Run elevator to hight for L1 / Coral station
     coPilot
@@ -164,7 +165,7 @@ public class RobotContainer {
         .onTrue(
             Commands.run(
                 () -> 
-                    elevator.setHome(), elevator));
+                    elevator.setPosition(Height.HOME), elevator));
     
     //Run elevator to height for L2
     coPilot
@@ -172,7 +173,7 @@ public class RobotContainer {
         .onTrue(
             Commands.run(
                 () ->
-                    elevator.setL2Coral(), elevator));
+                    elevator.setPosition(Height.L2), elevator));
 
     //Run elevator to height for L3
     coPilot
@@ -180,7 +181,7 @@ public class RobotContainer {
         .onTrue(
             Commands.run(
                 () -> 
-                    elevator.setL3Coral(), elevator));
+                    elevator.setPosition(Height.L3), elevator));
 
   }
 

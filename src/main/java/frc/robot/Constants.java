@@ -11,6 +11,7 @@ package frc.robot;
 public final class Constants {
   public static final double loopPeriodSecs = 0.02;
   public static final Mode currentMode = Mode.REAL;
+  public static Height currentHeight = Height.HOME;
 
   public enum Mode {
     /** Running on a real robot. */
@@ -18,6 +19,12 @@ public final class Constants {
 
     /** Replaying from a log file. */
     REPLAY
+  }
+
+  public enum Height {
+    HOME,
+    L2,
+    L3
   }
 
   public class elevatorHeight{

@@ -6,6 +6,8 @@ package frc.robot.subsystems.elevator;
 
 import org.littletonrobotics.junction.AutoLog;
 
+import frc.robot.Constants.Height;
+
 public interface ElevatorIO {
     @AutoLog
     public static class ElevatorIOInputs{
@@ -15,6 +17,8 @@ public interface ElevatorIO {
 
         public double appliedVolts = 0.0;
         public double currentAmps = 0.0;
+
+        public Height currentElevatorSetpoint = Height.HOME;
     }
 
     /** Updates the set of loggable inputs 
@@ -26,6 +30,11 @@ public interface ElevatorIO {
      * @param output desired hight of the elevator in inches
      */
     public default void setPosition(double output){}
+
+    /** Run motor to specified position with open loop
+     * @param height desired setpoint of the elevator
+     */
+    public default void setPosition(Height height){}
 
     /** Run motor at specified voltage 
      * @param outputVolts deired voltage to run the motor

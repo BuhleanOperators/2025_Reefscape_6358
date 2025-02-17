@@ -9,6 +9,7 @@ import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Coral extends SubsystemBase {
   private final CoralIO io;
@@ -45,7 +46,7 @@ public class Coral extends SubsystemBase {
 
   /** Run motors at different velocities to spit into L1(Trough) */
   public void scoreTrough(){
-    io.setVelocity(0, 0); //TODO Find and set velocities to score L1
+    io.setSpeed(0.15, 0.45); //TODO Find and set velocities to score L1
   }
 
   /** Stop the motors */
@@ -58,5 +59,17 @@ public class Coral extends SubsystemBase {
   public void intake(){
     io.setVelocity(0); //TODO Find and set velocities to intake without spitting out
     //? What logic can be added to stop the intake when there is a coral inside?
+  }
+
+  public void run(){
+    switch (Constants.currentHeight) {
+      case HOME:
+          scoreTrough();
+        break;
+    
+      default:
+        scoreCoral();
+        break;
+    }
   }
 }

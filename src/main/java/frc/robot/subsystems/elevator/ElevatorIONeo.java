@@ -19,6 +19,9 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.util.Units;
+import frc.robot.Constants;
+import frc.robot.Constants.Height;
+import frc.robot.Constants.elevatorHeight;
 
 /** Add your docs here. */
 public class ElevatorIONeo implements ElevatorIO{
@@ -63,11 +66,36 @@ public class ElevatorIONeo implements ElevatorIO{
 
         inputs.appliedVolts = neo.getBusVoltage();
         inputs.currentAmps = neo.getOutputCurrent();
+
+        inputs.currentElevatorSetpoint = Constants.currentHeight;
     }
 
     @Override
     public void setPosition(double output){
         controller.setReference(output, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+    }
+
+    @Override
+    public void setPosition(Height height){
+        switch (height){
+            case HOME:
+                controller.setReference(elevatorHeight.L1, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = Height.HOME;
+                break;
+            
+            case L2:
+                controller.setReference(elevatorHeight.L2, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = Height.L2;
+                break;
+        
+            case L3:
+                controller.setReference(elevatorHeight.L3, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = Height.L3;
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
