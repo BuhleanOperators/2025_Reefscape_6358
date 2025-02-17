@@ -17,10 +17,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-import edu.wpi.first.math.controller.ElevatorFeedforward;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.Debouncer;
-import edu.wpi.first.math.trajectory.ExponentialProfile;
 import edu.wpi.first.math.util.Units;
 
 /** Add your docs here. */
@@ -31,18 +28,8 @@ public class ElevatorIONeo implements ElevatorIO{
     private final RelativeEncoder encoder = neo.getEncoder();
 
     private final SparkClosedLoopController controller = neo.getClosedLoopController();
-    private PIDController pidController;
     
     private final Debouncer motorConnectedDebouncer = new Debouncer(0.5);
-
-    private double ka = 0.08;
-    private double kv = 3.07;
-
-    // private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.21, kv, ka); //TODO Tune values //Based on caluulator with 15 lbs 
-    private final ElevatorFeedforward feedforward = new ElevatorFeedforward(0.76, 0.0, kv);
-    private final ExponentialProfile profile = new ExponentialProfile(ExponentialProfile.Constraints.fromCharacteristics(10, kv, ka)); //TODO change kV and kA to match feedforward
-    private ExponentialProfile.State setpoint = new ExponentialProfile.State(0, 0);
-    private ExponentialProfile.State goal = new ExponentialProfile.State(0, 0);
 
     public ElevatorIONeo(){
         config
@@ -76,21 +63,6 @@ public class ElevatorIONeo implements ElevatorIO{
 
         inputs.appliedVolts = neo.getBusVoltage();
         inputs.currentAmps = neo.getOutputCurrent();
-    }
-
-    @Override
-    public void setPosition(double output, double feedforward){
-        // controller.setReference(output, ControlType.kPosition, ClosedLoopSlot.kSlot0, feedforward);
-        controller.setReference(output, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.01); //0.005
-    }
-
-    @Override
-    public void setPosition(ExponentialProfile.State desiredState){
-        ExponentialProfile.State next = profile.calculate(0.02, setpoint, desiredState);
-
-        controller.setReference(setpoint.position, ControlType.kPosition, ClosedLoopSlot.kSlot0, feedforward.calculate(next.velocity) / 12.0);
-        //? Can I change the 12.0 to affect speed? No, it became uncontrollable
-        setpoint = next;
     }
 
     @Override

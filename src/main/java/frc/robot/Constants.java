@@ -10,7 +10,6 @@ package frc.robot;
 /** This class contains global configuration describing the current robot and runtime mode. */
 public final class Constants {
   public static final double loopPeriodSecs = 0.02;
-  public static final boolean tuningMode = false;
   public static final Mode currentMode = Mode.REAL;
 
   public enum Mode {
@@ -21,24 +20,11 @@ public final class Constants {
     REPLAY
   }
 
-  public enum RobotType {
-    DEVBOT,
-    COMPBOT
-  }
-
-  public static boolean disableHAL = false;
-
-  public static void disableHAL() {
-    disableHAL = true;
-  }
-
-  /** Checks that the default robot is selected and tuning mode is disabled. */
-  public static class CheckPullRequest {
-    public static void main(String... args) {
-      if (tuningMode) {
-        System.err.println("Do not merge, non-default constants are configured.");
-        System.exit(1);
-      }
-    }
+  public class elevatorHeight{
+    public static double L1 = 0;
+    public static double L2 = 8;
+    public static double L3 = 16;
+    public static double lowAlgae = 0;
+    public static double highAlgae = 0;
   }
 }

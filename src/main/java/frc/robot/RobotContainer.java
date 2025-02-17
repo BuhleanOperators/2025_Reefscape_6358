@@ -144,42 +144,30 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-    
-    //Manual control of the Elevator
-    coPilot
-        .rightBumper()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setSpeed(0.5), elevator))
-        .onFalse(
-            Commands.run(
-                () -> 
-                    elevator.stop(), elevator));
+
+    //Run elevator to hight for L1 / Coral station
     coPilot
         .a()
         .onTrue(
             Commands.run(
                 () -> 
-                    elevator.setL1Coral(), elevator)); //8
+                    elevator.setHome(), elevator));
+    
+    //Run elevator to height for L2
     coPilot
         .b()
         .onTrue(
             Commands.run(
                 () ->
-                    elevator.setL2Coral(), elevator)); //0
+                    elevator.setL2Coral(), elevator));
+
+    //Run elevator to height for L3
     coPilot
         .x()
         .onTrue(
             Commands.run(
                 () -> 
-                    elevator.setL3Coral(), elevator)); //16
-    coPilot
-        .y()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setCoralStation(), elevator)); //20
+                    elevator.setL3Coral(), elevator));
 
   }
 

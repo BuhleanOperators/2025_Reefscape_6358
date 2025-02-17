@@ -6,8 +6,6 @@ package frc.robot.subsystems.elevator;
 
 import org.littletonrobotics.junction.AutoLog;
 
-import edu.wpi.first.math.trajectory.ExponentialProfile;
-
 public interface ElevatorIO {
     @AutoLog
     public static class ElevatorIOInputs{
@@ -23,17 +21,6 @@ public interface ElevatorIO {
      * @param inputs set of updateable inputs
      */
     public default void updateInputs(ElevatorIOInputs inputs){}
-
-    /** Run motor at specified open loop value 
-     * @param outputRads desired position of the elevator in radians
-     * @param feedforward feedforward controller for feedack control
-     */
-    public default void setPosition(double outputRads, double feedforward){}
-
-    /** Run motor to specified position with open loop
-     * @param desiredState exponential profile state (use inches for position and 0 as velocity)
-     */
-    public default void setPosition(ExponentialProfile.State desiredState){}
 
     /** Run motor to specified position with open loop
      * @param output desired hight of the elevator in inches
