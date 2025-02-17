@@ -144,13 +144,11 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-    
     xDriver
         .leftBumper()
         .whileTrue(
             Commands.startEnd(
                 () -> coral.scoreCoral(), coral::stop, coral));
-    
   }
 
   /**
