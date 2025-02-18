@@ -39,12 +39,14 @@ public class Coral extends SubsystemBase {
 
   /** Run motors to score L2 and L3 CORAL */
   public void scoreCoral(){
-    io.setSpeed(0.35); //TODO Find and set velocity needed to score L2 and L3
+    // io.setVelocity(3850); //TODO Find and set velocity needed to score L2 and L3
+    io.setSpeed(Constants.coralSpeed.speed);
+    //? Are L2 and L3 velocities the same?
   }
 
   /** Run motors at different velocities to spit into L1(Trough) */
   public void scoreTrough(){
-    io.setSpeed(0.15, 0.45); //TODO Find and set velocities to score L1
+    io.setSpeed(Constants.coralSpeed.troughLeft, Constants.coralSpeed.troughRight); //TODO Find and set velocities to score L1
   }
 
   /** Stop the motors */

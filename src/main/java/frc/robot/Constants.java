@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Preferences;
+
 /** This class contains global configuration describing the current robot and runtime mode. */
 public final class Constants {
   public static final double loopPeriodSecs = 0.02;
@@ -33,5 +35,11 @@ public final class Constants {
     public static double L3 = 16;
     public static double lowAlgae = 0;
     public static double highAlgae = 0;
+  }
+
+  public class coralSpeed{
+    public static double troughLeft = 0.15;
+    public static double troughRight = 0.45;
+    public static double speed = 0.45;
   }
 }

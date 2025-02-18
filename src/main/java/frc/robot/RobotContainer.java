@@ -17,6 +17,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -192,5 +193,27 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autoChooser.get();
+  }
+
+  public void initPreferences(){
+    Preferences.initDouble("L2 Height", 8);
+    Preferences.initDouble("L3 Height", 16);
+    Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.initDouble("Trough Left Speed", 0.15);
+    Preferences.initDouble("Trough Right Speed", 0.45);
+  }
+  public void updatePreferences(){
+    Preferences.getDouble("L2 Height", 8);
+    Preferences.getDouble("L3 Height", 16);
+    Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.getDouble("Trough Left Speed", 0.15);
+    Preferences.getDouble("Trough Right Speed", 0.45);
+
+    Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 8);
+    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 16);
+
+    Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
+    Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
+    Constants.coralSpeed.troughRight = Preferences.getDouble("Trough Right Speed", 0.45);
   }
 }

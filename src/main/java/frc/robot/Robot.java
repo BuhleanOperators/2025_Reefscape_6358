@@ -95,6 +95,7 @@ public class Robot extends LoggedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
+    robotContainer.initPreferences();
   }
 
   /** This function is called periodically during all modes. */
@@ -112,6 +113,8 @@ public class Robot extends LoggedRobot {
 
     // Return to normal thread priority
     Threads.setCurrentThreadPriority(false, 10);
+
+    robotContainer.updatePreferences();
   }
 
   /** This function is called once when the robot is disabled. */
@@ -147,6 +150,7 @@ public class Robot extends LoggedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
+    robotContainer.initPreferences();
   }
 
   /** This function is called periodically during operator control. */
