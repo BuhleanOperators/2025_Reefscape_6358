@@ -71,11 +71,6 @@ public class ElevatorIONeo implements ElevatorIO{
     }
 
     @Override
-    public void setPosition(double output){
-        controller.setReference(output, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
-    }
-
-    @Override
     public void setPosition(Height height){
         switch (height){
             case HOME:

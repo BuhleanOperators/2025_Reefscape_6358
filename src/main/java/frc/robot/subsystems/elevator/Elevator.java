@@ -38,21 +38,9 @@ public class Elevator extends SubsystemBase {
     io.stop();
   }
 
-  /** Set position to score  L1*/
-  public void setHome(){
-    io.setPosition(elevatorHeight.L1);
-  }
-
-  /** Set position to score L2 CORAL */
-  public void setL2Coral(){
-    io.setPosition(elevatorHeight.L2);
-  }
-
-  /** Set position to score L3 CORAL */
-  public void setL3Coral(){
-    io.setPosition(elevatorHeight.L3);
-  }
-
+  /** Set the position of the elevator
+   * @param height The desired state of the elevator
+   */
   public void setPosition(Height height){
     io.setPosition(height);
   }

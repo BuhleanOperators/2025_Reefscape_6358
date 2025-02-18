@@ -22,32 +22,27 @@ public interface ElevatorIO {
     }
 
     /** Updates the set of loggable inputs 
-     * @param inputs set of updateable inputs
+     * @param inputs The set of updateable inputs
      */
     public default void updateInputs(ElevatorIOInputs inputs){}
 
     /** Run motor to specified position with open loop
-     * @param output desired hight of the elevator in inches
-     */
-    public default void setPosition(double output){}
-
-    /** Run motor to specified position with open loop
-     * @param height desired setpoint of the elevator
+     * @param height The desired setpoint of the elevator
      */
     public default void setPosition(Height height){}
 
     /** Run motor at specified voltage 
-     * @param outputVolts deired voltage to run the motor
+     * @param outputVolts The Desired voltage to run the motor
      */
     public default void runVoltage(double outputVolts){}
 
     /** Run motor at specified speed
-     * @param speed deired speed of the motor (-1 - 1)
+     * @param speed The Desired speed of the motor (-1 - 1)
      */
     public default void setSpeed(double speed){}
 
     /** Set brake mode enabled 
-     * @param enable weather to enable break mode
+     * @param enable Weather to enable break mode
      */
     public default void setBrakeMode(boolean enable){}
 
