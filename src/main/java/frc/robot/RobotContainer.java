@@ -162,7 +162,7 @@ public class RobotContainer {
 
     //Run elevator to hight for L1 / Coral station
     coPilot
-        .a()
+        .b()
         .onTrue(
             Commands.run(
                 () -> 
@@ -170,7 +170,7 @@ public class RobotContainer {
     
     //Run elevator to height for L2
     coPilot
-        .b()
+        .a()
         .onTrue(
             Commands.run(
                 () ->
@@ -196,21 +196,21 @@ public class RobotContainer {
   }
 
   public void initPreferences(){
-    Preferences.initDouble("L2 Height", 8);
-    Preferences.initDouble("L3 Height", 16);
+    Preferences.initDouble("L2 Height", 10);
+    Preferences.initDouble("L3 Height", 25.5);
     Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.initDouble("Trough Left Speed", 0.15);
     Preferences.initDouble("Trough Right Speed", 0.45);
   }
   public void updatePreferences(){
-    Preferences.getDouble("L2 Height", 8);
-    Preferences.getDouble("L3 Height", 16);
+    Preferences.getDouble("L2 Height", 10);
+    Preferences.getDouble("L3 Height", 25.5);
     Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.getDouble("Trough Left Speed", 0.15);
     Preferences.getDouble("Trough Right Speed", 0.45);
 
-    Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 8);
-    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 16);
+    Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 10);
+    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 25.5);
 
     Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
