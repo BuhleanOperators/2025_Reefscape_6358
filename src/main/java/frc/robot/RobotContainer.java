@@ -17,11 +17,13 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.Constants.Height;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.coral.Coral;
@@ -32,6 +34,9 @@ import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.subsystems.elevator.ElevatorIO;
+import frc.robot.subsystems.elevator.ElevatorIONeo;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -45,6 +50,7 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
   private final Coral coral;
+  private final Elevator elevator;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -67,6 +73,8 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.BackRight));
         coral = 
             new Coral(new CoralIONeo550());
+        elevator =
+            new Elevator(new ElevatorIONeo());
         break;
 
       default:
@@ -80,6 +88,8 @@ public class RobotContainer {
                 new ModuleIO() {});
         coral =
             new Coral(new CoralIO() {});
+        elevator = 
+            new Elevator(new ElevatorIO() {});
         break;
     }
 
@@ -148,7 +158,32 @@ public class RobotContainer {
         .leftBumper()
         .whileTrue(
             Commands.startEnd(
-                () -> coral.scoreCoral(), coral::stop, coral));
+                () -> coral.run(), coral::stop, coral));
+
+    //Run elevator to hight for L1 / Coral station
+    coPilot
+        .b()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setPosition(Height.HOME), elevator));
+    
+    //Run elevator to height for L2
+    coPilot
+        .a()
+        .onTrue(
+            Commands.run(
+                () ->
+                    elevator.setPosition(Height.L2), elevator));
+
+    //Run elevator to height for L3
+    coPilot
+        .x()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setPosition(Height.L3), elevator));
+
   }
 
   /**
@@ -158,5 +193,27 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autoChooser.get();
+  }
+
+  public void initPreferences(){
+    Preferences.initDouble("L2 Height", 10);
+    Preferences.initDouble("L3 Height", 25.5);
+    Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.initDouble("Trough Left Speed", 0.15);
+    Preferences.initDouble("Trough Right Speed", 0.45);
+  }
+  public void updatePreferences(){
+    Preferences.getDouble("L2 Height", 10);
+    Preferences.getDouble("L3 Height", 25.5);
+    Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.getDouble("Trough Left Speed", 0.15);
+    Preferences.getDouble("Trough Right Speed", 0.45);
+
+    Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 10);
+    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 25.5);
+
+    Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
+    Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
+    Constants.coralSpeed.troughRight = Preferences.getDouble("Trough Right Speed", 0.45);
   }
 }

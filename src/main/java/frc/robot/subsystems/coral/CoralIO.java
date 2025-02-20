@@ -27,37 +27,44 @@ public interface CoralIO {
     }
 
     /** Updates set of loggable inputs 
-     * @param inputs set of updatable inputs
+     * @param inputs The set of updatable inputs
     */
     public default void updateInputs(CoralInputs inputs){}
 
     /** Sets velocity of both end effector motors to specified velocity
      * <p>Motors rotate in opposite directions</p>
-     * @param velocityRPM desired velocity of the motors in rotations per minute
+     * @param velocityRPM The desired velocity of the motors in rotations per minute
     */
     public default void setVelocity(double velocityRPM){}
 
     /** Sets velocity of specified motor to specified velocity
-     * @param isRightMotor weather or not to run the right motor
-     * @param velocityRPM deired velocity of the motor in rotations per minute
+     * @param isRightMotor Weather or not to run the right motor
+     * @param velocityRPM The desired velocity of the motor in rotations per minute
     */
     public default void setVelocity(boolean isRightMotor, double velocityRPM){}
 
     /** Sets velocity of motors to specified velocities 
      * <p>Motors rotate in oposite directions on defalut.</p>
-     * @param leftVelocityRPM deired velocity of the left motor in rotations per minute
-     * @param rightVelocityRPM deired velocity of the right motor in rotations per minute
+     * @param leftVelocityRPM The desired velocity of the left motor in rotations per minute
+     * @param rightVelocityRPM The desired velocity of the right motor in rotations per minute
     */
     public default void setVelocity(double leftVelocityRPM, double rightVelocityRPM){}
 
     /** Sets the speed of the motors to specified percent
      * <p>Motors spin in oppoisite directions
-     * @param speed Desired speed of the motors (1 to -1)
+     * @param speed The desired speed of the motors (1 to -1)
      */
     public default void setSpeed(double speed){}
 
+    /** Sets the speed of the motors to specified percent
+     * <p>Motors spin in oppoisite directions
+     * @param leftSpeed The desired speed of the left motor (1 to -1)
+     * @param rightSpeed The desired speed of the right motor (1 to -1)
+     */
+    public default void setSpeed(double leftSpeed, double rightSpeed){}
+
     /** Set break mode enabled 
-     * @param enable desired enabled state of break mode for both motors
+     * @param enable The desired enabled state of break mode for both motors
     */
     public default void setBreakMode(boolean enable){}
 
