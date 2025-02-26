@@ -23,9 +23,16 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-import frc.robot.Constants.Height;
+import frc.robot.Constants.BracePosition;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.climb.Brace;
+import frc.robot.subsystems.climb.BraceIO;
+import frc.robot.subsystems.climb.BraceIO_PG71;
+import frc.robot.subsystems.climb.Climb;
+import frc.robot.subsystems.climb.Pneumatics;
+import frc.robot.subsystems.climb.PneumaticsIO;
+import frc.robot.subsystems.climb.PneumaticsIOPneumaticsHub;
 import frc.robot.subsystems.coral.Coral;
 import frc.robot.subsystems.coral.CoralIO;
 import frc.robot.subsystems.coral.CoralIONeo550;
@@ -48,69 +55,84 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
  */
 public class RobotContainer {
   // Subsystems
-  private final Drive drive;
-  private final Coral coral;
-  private final Elevator elevator;
+//   private final Drive drive;
+//   private final Coral coral;
+//   private final Elevator elevator;
+    final Climb climb;
+    // final Brace brace;
+    // final Pneumatics pneumatics;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
   private final CommandXboxController coPilot = new CommandXboxController(1);
 
   // Dashboard inputs
-  private final LoggedDashboardChooser<Command> autoChooser;
+//   private final LoggedDashboardChooser<Command> autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     switch (Constants.currentMode) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
-        drive =
-            new Drive(
-                new GyroIOPigeon2(),
-                new ModuleIOTalonFX(TunerConstants.FrontLeft),
-                new ModuleIOTalonFX(TunerConstants.FrontRight),
-                new ModuleIOTalonFX(TunerConstants.BackLeft),
-                new ModuleIOTalonFX(TunerConstants.BackRight));
-        coral = 
-            new Coral(new CoralIONeo550());
-        elevator =
-            new Elevator(new ElevatorIONeo());
+        // drive =
+        //     new Drive(
+        //         new GyroIOPigeon2(),
+        //         new ModuleIOTalonFX(TunerConstants.FrontLeft),
+        //         new ModuleIOTalonFX(TunerConstants.FrontRight),
+        //         new ModuleIOTalonFX(TunerConstants.BackLeft),
+        //         new ModuleIOTalonFX(TunerConstants.BackRight));
+        // coral = 
+        //     new Coral(new CoralIONeo550());
+        // elevator =
+        //     new Elevator(new ElevatorIONeo());
+        climb = 
+            new Climb(new PneumaticsIOPneumaticsHub(), new BraceIO_PG71());
+        // brace =
+        //     new Brace(new BraceIO_PG71());
+        // pneumatics = 
+        //     new Pneumatics(new PneumaticsIOPneumaticsHub());
         break;
 
       default:
         // Replayed robot, disable IO implementations
-        drive =
-            new Drive(
-                new GyroIO() {},
-                new ModuleIO() {},
-                new ModuleIO() {},
-                new ModuleIO() {},
-                new ModuleIO() {});
-        coral =
-            new Coral(new CoralIO() {});
-        elevator = 
-            new Elevator(new ElevatorIO() {});
+        // drive =
+        //     new Drive(
+        //         new GyroIO() {},
+        //         new ModuleIO() {},
+        //         new ModuleIO() {},
+        //         new ModuleIO() {},
+        //         new ModuleIO() {});
+        // coral =
+        //     new Coral(new CoralIO() {});
+        // elevator = 
+        //     new Elevator(new ElevatorIO() {});
+        climb =
+            new Climb(new PneumaticsIO() {}, new BraceIO() {});
+        // brace = 
+        //     new Brace(new BraceIO() {});
+        // pneumatics = 
+        //     new Pneumatics(new PneumaticsIO() {});
         break;
     }
 
     // Set up auto routines
-    autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
+    // autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 
     // Set up SysId routines
-    autoChooser.addOption(
-        "Drive Wheel Radius Characterization", DriveCommands.wheelRadiusCharacterization(drive));
-    autoChooser.addOption(
-        "Drive Simple FF Characterization", DriveCommands.feedforwardCharacterization(drive));
-    autoChooser.addOption(
-        "Drive SysId (Quasistatic Forward)",
-        drive.sysIdQuasistatic(SysIdRoutine.Direction.kForward));
-    autoChooser.addOption(
-        "Drive SysId (Quasistatic Reverse)",
-        drive.sysIdQuasistatic(SysIdRoutine.Direction.kReverse));
-    autoChooser.addOption(
-        "Drive SysId (Dynamic Forward)", drive.sysIdDynamic(SysIdRoutine.Direction.kForward));
-    autoChooser.addOption(
-        "Drive SysId (Dynamic Reverse)", drive.sysIdDynamic(SysIdRoutine.Direction.kReverse));
+    // autoChooser.addOption(
+    //     "Drive Wheel Radius Characterization", DriveCommands.wheelRadiusCharacterization(drive));
+    // autoChooser.addOption(
+    //     "Drive Simple FF Characterization", DriveCommands.feedforwardCharacterization(drive));
+    // autoChooser.addOption(
+    //     "Drive SysId (Quasistatic Forward)",
+    //     drive.sysIdQuasistatic(SysIdRoutine.Direction.kForward));
+    // autoChooser.addOption(
+    //     "Drive SysId (Quasistatic Reverse)",
+    //     drive.sysIdQuasistatic(SysIdRoutine.Direction.kReverse));
+    // autoChooser.addOption(
+    //     "Drive SysId (Dynamic Forward)", drive.sysIdDynamic(SysIdRoutine.Direction.kForward));
+    // autoChooser.addOption(
+    //     "Drive SysId (Dynamic Reverse)", drive.sysIdDynamic(SysIdRoutine.Direction.kReverse));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -124,65 +146,98 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Default command, normal field-relative drive
-    drive.setDefaultCommand(
-        DriveCommands.joystickDrive(
-            drive,
-            () -> -xDriver.getLeftY(),
-            () -> -xDriver.getLeftX(),
-            () -> -xDriver.getRightX()));
+    // drive.setDefaultCommand(
+    //     DriveCommands.joystickDrive(
+    //         drive,
+    //         () -> -xDriver.getLeftY(),
+    //         () -> -xDriver.getLeftX(),
+    //         () -> -xDriver.getRightX()));
 
-    // Lock to 0° when A button is held
+    // // Lock to 0° when A button is held
+    // xDriver
+    //     .a()
+    //     .whileTrue(
+    //         DriveCommands.joystickDriveAtAngle(
+    //             drive,
+    //             () -> -xDriver.getLeftY(),
+    //             () -> -xDriver.getLeftX(),
+    //             () -> new Rotation2d()));
+
+    // // Switch to X pattern when X button is pressed
+    // xDriver.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
+
+    // // Reset gyro to 0° when B button is pressed
+    // xDriver
+    //     .b()
+    //     .onTrue(
+    //         Commands.runOnce(
+    //                 () ->
+    //                     drive.setPose(
+    //                         new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
+    //                 drive)
+    //             .ignoringDisable(true));
+    // xDriver
+    //     .leftBumper()
+    //     .whileTrue(
+    //         Commands.startEnd(
+    //             () -> coral.run(), coral::stop, coral));
+    
     xDriver
-        .a()
-        .whileTrue(
-            DriveCommands.joystickDriveAtAngle(
-                drive,
-                () -> -xDriver.getLeftY(),
-                () -> -xDriver.getLeftX(),
-                () -> new Rotation2d()));
-
-    // Switch to X pattern when X button is pressed
-    xDriver.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
-
-    // Reset gyro to 0° when B button is pressed
-    xDriver
-        .b()
+        .y()
         .onTrue(
             Commands.runOnce(
-                    () ->
-                        drive.setPose(
-                            new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
-                    drive)
-                .ignoringDisable(true));
-    xDriver
-        .leftBumper()
-        .whileTrue(
-            Commands.startEnd(
-                () -> coral.run(), coral::stop, coral));
+                () -> 
+                    climb.run(), climb));
+
+    // xDriver
+    //     .y()
+    //     .onTrue(
+    //         Commands.runOnce(
+    //             () -> 
+    //                 brace.setPosition(BracePosition.FULL), brace));
 
     //Run elevator to hight for L1 / Coral station
-    coPilot
-        .b()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setPosition(Height.HOME), elevator));
+    // coPilot
+    //     .b()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //                 elevator.setPosition(Height.HOME), elevator));
     
-    //Run elevator to height for L2
-    coPilot
-        .a()
-        .onTrue(
-            Commands.run(
-                () ->
-                    elevator.setPosition(Height.L2), elevator));
+    // //Run elevator to height for L2
+    // coPilot
+    //     .a()
+    //     .onTrue(
+    //         Commands.run(
+    //             () ->
+    //                 elevator.setPosition(Height.L2), elevator));
 
-    //Run elevator to height for L3
+    // //Run elevator to height for L3
+    // coPilot
+    //     .x()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //                 elevator.setPosition(Height.L3), elevator));
+
     coPilot
-        .x()
+        .rightBumper()
         .onTrue(
-            Commands.run(
+            Commands.runOnce(
                 () -> 
-                    elevator.setPosition(Height.L3), elevator));
+                    climb.climbPistons(), climb));
+    // coPilot
+    //     .rightBumper()
+    //     .onTrue(
+    //         Commands.runOnce(
+    //             () -> 
+    //                 pneumatics.climbDown(), pneumatics));
+    // coPilot
+    //     .leftBumper()
+    //     .onTrue(
+    //         Commands.runOnce(
+    //             () -> 
+    //                 pneumatics.climbUp(), pneumatics));
 
   }
 
@@ -192,7 +247,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autoChooser.get();
+    // return autoChooser.get();
+    return null;
   }
 
   public void initPreferences(){
@@ -201,6 +257,9 @@ public class RobotContainer {
     Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.initDouble("Trough Left Speed", 0.15);
     Preferences.initDouble("Trough Right Speed", 0.45);
+    Preferences.initDouble("Brace Home", 0);
+    Preferences.initDouble("Brace Partial", 0.25);
+    Preferences.initDouble("Brace Full", 0.5);
   }
   public void updatePreferences(){
     Preferences.getDouble("L2 Height", 10);
@@ -208,12 +267,19 @@ public class RobotContainer {
     Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.getDouble("Trough Left Speed", 0.15);
     Preferences.getDouble("Trough Right Speed", 0.45);
+    Preferences.getDouble("Brace Home", 0);
+    Preferences.getDouble("Brace Partial", 0.25);
+    Preferences.getDouble("Brace Full", 0.5);
 
-    Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 10);
-    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 25.5);
+    Constants.elevatorSetpoints.L2 = Preferences.getDouble("L2 Height", 10);
+    Constants.elevatorSetpoints.L3 = Preferences.getDouble("L3 Height", 25.5);
 
     Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
     Constants.coralSpeed.troughRight = Preferences.getDouble("Trough Right Speed", 0.45);
+
+    Constants.braceSetpoints.home = Preferences.getDouble("Brace Home", 0);
+    Constants.braceSetpoints.partial = Preferences.getDouble("Brace Partial", 0.25);
+    Constants.braceSetpoints.full = Preferences.getDouble("Brace Full", 0.5);
   }
 }

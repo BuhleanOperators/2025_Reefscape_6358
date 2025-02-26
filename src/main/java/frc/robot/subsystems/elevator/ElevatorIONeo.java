@@ -20,8 +20,8 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
-import frc.robot.Constants.Height;
-import frc.robot.Constants.elevatorHeight;
+import frc.robot.Constants.ElevatorHeight;
+import frc.robot.Constants.elevatorSetpoints;
 
 /** Add your docs here. */
 public class ElevatorIONeo implements ElevatorIO{
@@ -71,21 +71,21 @@ public class ElevatorIONeo implements ElevatorIO{
     }
 
     @Override
-    public void setPosition(Height height){
+    public void setPosition(ElevatorHeight height){
         switch (height){
             case HOME:
-                controller.setReference(elevatorHeight.L1, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
-                Constants.currentHeight = Height.HOME;
+                controller.setReference(elevatorSetpoints.L1, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = ElevatorHeight.HOME;
                 break;
             
             case L2:
-                controller.setReference(elevatorHeight.L2, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
-                Constants.currentHeight = Height.L2;
+                controller.setReference(elevatorSetpoints.L2, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = ElevatorHeight.L2;
                 break;
         
             case L3:
-                controller.setReference(elevatorHeight.L3, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
-                Constants.currentHeight = Height.L3;
+                controller.setReference(elevatorSetpoints.L3, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = ElevatorHeight.L3;
                 break;
 
             default:

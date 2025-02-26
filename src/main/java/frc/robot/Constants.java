@@ -7,13 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Preferences;
-
 /** This class contains global configuration describing the current robot and runtime mode. */
 public final class Constants {
   public static final double loopPeriodSecs = 0.02;
   public static final Mode currentMode = Mode.REAL;
-  public static Height currentHeight = Height.HOME;
+  public static ElevatorHeight currentHeight = ElevatorHeight.HOME;
+  public static BracePosition currentPosition = BracePosition.HOME;
 
   public enum Mode {
     /** Running on a real robot. */
@@ -23,13 +22,19 @@ public final class Constants {
     REPLAY
   }
 
-  public enum Height {
+  public enum ElevatorHeight {
     HOME,
     L2,
     L3
   }
 
-  public class elevatorHeight{
+  public enum BracePosition {
+    HOME,
+    PARTIAL,
+    FULL
+  }
+
+  public class elevatorSetpoints{
     public static double L1 = 0;
     public static double L2 = 8;
     public static double L3 = 16;
@@ -41,5 +46,11 @@ public final class Constants {
     public static double troughLeft = 0.15;
     public static double troughRight = 0.45;
     public static double speed = 0.45;
+  }
+
+  public class braceSetpoints{
+    public static double home = 0.0;
+    public static double partial = 0.25;
+    public static double full = 0.5;
   }
 }

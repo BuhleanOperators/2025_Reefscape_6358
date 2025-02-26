@@ -9,8 +9,7 @@ import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.Height;
-import frc.robot.Constants.elevatorHeight;
+import frc.robot.Constants.ElevatorHeight;
 
 public class Elevator extends SubsystemBase {
   private ElevatorIO io;
@@ -41,7 +40,7 @@ public class Elevator extends SubsystemBase {
   /** Set the position of the elevator
    * @param height The desired state of the elevator
    */
-  public void setPosition(Height height){
+  public void setPosition(ElevatorHeight height){
     io.setPosition(height);
   }
 }

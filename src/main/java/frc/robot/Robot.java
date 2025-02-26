@@ -115,6 +115,8 @@ public class Robot extends LoggedRobot {
     Threads.setCurrentThreadPriority(false, 10);
 
     robotContainer.updatePreferences();
+    // robotContainer.pneumatics.enableCompressor();
+    robotContainer.climb.enableCompressor();
   }
 
   /** This function is called once when the robot is disabled. */
@@ -151,6 +153,8 @@ public class Robot extends LoggedRobot {
       autonomousCommand.cancel();
     }
     robotContainer.initPreferences();
+    // robotContainer.pneumatics.climbUp();
+    robotContainer.climb.setInitalPiston();
   }
 
   /** This function is called periodically during operator control. */

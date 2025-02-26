@@ -22,8 +22,6 @@ public class Coral extends SubsystemBase {
     this.io = io;
     io.setBreakMode(false);
 
-    io.updateInputs(inputs);
-
     leftMotorDisconnected = new Alert("Left coral motor disconnected. System may not function properly.", AlertType.kError);
     rightMotorDisconnected = new Alert("Right coral motor disconnected. System my not function properly.", AlertType.kError);
 
