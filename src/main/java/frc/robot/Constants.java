@@ -14,6 +14,7 @@ public final class Constants {
   public static final double loopPeriodSecs = 0.02;
   public static final Mode currentMode = Mode.REAL;
   public static Height currentHeight = Height.HOME;
+  public static AlgaeDirection currentDirection = AlgaeDirection.INTAKE;
 
   public enum Mode {
     /** Running on a real robot. */
@@ -29,6 +30,11 @@ public final class Constants {
     L3
   }
 
+  public enum AlgaeDirection {
+    INTAKE,
+    EXTAKE
+  }
+
   public class elevatorHeight{
     public static double L1 = 0;
     public static double L2 = 8;
@@ -41,5 +47,10 @@ public final class Constants {
     public static double troughLeft = 0.15;
     public static double troughRight = 0.45;
     public static double speed = 0.45;
+  }
+
+  public class algaeSpeed{
+    public static double intakeSpeed = 1.0;
+    public static double extakeSpeed = -1.0;
   }
 }

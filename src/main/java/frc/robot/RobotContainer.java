@@ -201,6 +201,8 @@ public class RobotContainer {
     Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.initDouble("Trough Left Speed", 0.15);
     Preferences.initDouble("Trough Right Speed", 0.45);
+    Preferences.initDouble("Algae Intake Speed", 1.0);
+    Preferences.initDouble("Algae Extake Speed", -1.0);
   }
   public void updatePreferences(){
     Preferences.getDouble("L2 Height", 10);
@@ -208,6 +210,8 @@ public class RobotContainer {
     Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.getDouble("Trough Left Speed", 0.15);
     Preferences.getDouble("Trough Right Speed", 0.45);
+    Preferences.getDouble("Algae Intake Speed", 1.0);
+    Preferences.getDouble("Algae Extake Speed", -1.0);
 
     Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 10);
     Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 25.5);
@@ -215,5 +219,8 @@ public class RobotContainer {
     Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
     Constants.coralSpeed.troughRight = Preferences.getDouble("Trough Right Speed", 0.45);
+
+    Constants.algaeSpeed.intakeSpeed = Preferences.getDouble("Algae Intake Speed", 1.0);
+    Constants.algaeSpeed.extakeSpeed = Preferences.getDouble("Algae Extake Speed", -1.0);
   }
 }
