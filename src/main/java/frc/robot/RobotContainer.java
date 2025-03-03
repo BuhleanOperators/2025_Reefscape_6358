@@ -123,6 +123,8 @@ public class RobotContainer {
     //Algae Commands
     // NamedCommands.registerCommand("RemoveAlgae", 
     //     Commands.run(() -> algae.grabAlgae()).withTimeout(2));
+    // NamedCommands.registerCommand("SpitAlgae", 
+    //     Commands.run(() -> algae.extakeAlgae()).withTimeout(1));  
 
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
