@@ -14,6 +14,8 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -93,6 +95,27 @@ public class RobotContainer {
         break;
     }
 
+    //----- Set up Named Commands -----
+    //Elevator Commands
+    NamedCommands.registerCommand("ElevatorHome", 
+        Commands.runOnce(() -> elevator.setPosition(Height.HOME), elevator));
+    NamedCommands.registerCommand("ElevatorL2", 
+        Commands.runOnce(() -> elevator.setPosition(Height.L2), elevator));
+    NamedCommands.registerCommand("ElevatorL3", 
+        Commands.runOnce(() -> elevator.setPosition(Height.L3), elevator));
+    NamedCommands.registerCommand("ElevatorHighAlgae", 
+        Commands.runOnce(() -> elevator.setPosition(Height.HIGH_ALGAE), elevator));
+    NamedCommands.registerCommand("ElevatorLowAlgae", 
+        Commands.runOnce(() -> elevator.setPosition(Height.LOW_ALGAE), elevator));
+    //Scoring Commands
+    NamedCommands.registerCommand("CoralTroughScore",
+        Commands.run(() -> coral.scoreTrough()).withTimeout(0.25));
+    NamedCommands.registerCommand("CoralBranchScore", 
+        Commands.run(() -> coral.scoreCoral()).withTimeout(0.25));
+    //Algae Commands
+    // NamedCommands.registerCommand("RemoveAlgae", 
+    //     Commands.run(() -> algae.grabAlgae()).withTimeout(2));
+
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 
@@ -131,6 +154,7 @@ public class RobotContainer {
             () -> -xDriver.getLeftX(),
             () -> -xDriver.getRightX()));
 
+    //----- Driver Button Bindings -----
     // Lock to 0° when A button is held
     xDriver
         .a()
@@ -160,6 +184,7 @@ public class RobotContainer {
             Commands.startEnd(
                 () -> coral.run(), coral::stop, coral));
 
+    //----- CoPilot Button Bindings ------
     //Run elevator to hight for L1 / Coral station
     coPilot
         .b()
