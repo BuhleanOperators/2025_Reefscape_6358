@@ -26,7 +26,9 @@ public final class Constants {
   public enum Height {
     HOME,
     L2,
-    L3
+    L3,
+    LOW_ALGAE,
+    HIGH_ALGAE
   }
 
   public class elevatorHeight{

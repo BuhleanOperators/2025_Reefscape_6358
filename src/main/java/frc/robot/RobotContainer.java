@@ -183,6 +183,22 @@ public class RobotContainer {
             Commands.run(
                 () -> 
                     elevator.setPosition(Height.L3), elevator));
+    
+    //Run elevator to height for Low Algae
+    coPilot
+        .leftBumper()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setPosition(Height.LOW_ALGAE), elevator));
+      
+    //Run elevator to height for High Algae                
+    coPilot
+        .rightBumper()
+        .onTrue(
+            Commands.run(
+                () -> 
+                elevator.setPosition(Height.HIGH_ALGAE), elevator));
 
   }
 
@@ -198,6 +214,8 @@ public class RobotContainer {
   public void initPreferences(){
     Preferences.initDouble("L2 Height", 10);
     Preferences.initDouble("L3 Height", 25.5);
+    Preferences.initDouble("High Algae Height", 25.5);
+    Preferences.initDouble("Low Algae Height", 10);
     Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.initDouble("Trough Left Speed", 0.15);
     Preferences.initDouble("Trough Right Speed", 0.45);
@@ -205,15 +223,20 @@ public class RobotContainer {
   public void updatePreferences(){
     Preferences.getDouble("L2 Height", 10);
     Preferences.getDouble("L3 Height", 25.5);
+    Preferences.getDouble("High Algae Height", 25.5);
+    Preferences.getDouble("Low Algae Height", 10);
     Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Preferences.getDouble("Trough Left Speed", 0.15);
     Preferences.getDouble("Trough Right Speed", 0.45);
 
     Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 10);
     Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 25.5);
+    Constants.elevatorHeight.lowAlgae = Preferences.getDouble("Low Algae Height", 10);
+    Constants.elevatorHeight.highAlgae = Preferences.getDouble("High Algae Height", 25.5);
 
     Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
     Constants.coralSpeed.troughRight = Preferences.getDouble("Trough Right Speed", 0.45);
+
   }
 }
