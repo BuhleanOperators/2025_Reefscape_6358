@@ -1,6 +1,6 @@
 {
-  "robotWidth": 0.8382,
-  "robotLength": 0.8382,
+  "robotWidth": 0.857,
+  "robotLength": 0.857,
   "holonomicMode": true,
   "pathFolders": [],
   "autoFolders": [
@@ -32,5 +32,7 @@
   "brModuleY": -0.254,
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
-  "robotFeatures": []
+  "robotFeatures": [
+    "{\"name\":\"Shooter\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.2825,\"y\":-0.025},\"size\":{\"width\":0.254,\"length\":0.1016},\"borderRadius\":0.05,\"strokeWidth\":0.02,\"filled\":false}}"
+  ]
 }
