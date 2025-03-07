@@ -7,118 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RS - FE"
+            "pathName": "CS - HG"
           }
         },
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL2"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "CoralBranchScore"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorHome"
-                }
-              }
-            ]
+            "name": "ElevatorLowAlgae"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "FE - RCS"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RCS - CD"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorLowAlgae"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "RemoveAlgae"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorL3"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "CoralBranchScore"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ElevatorHome"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": null
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "CD - RCS"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RCS - CD"
+            "name": "RemoveAlgae"
           }
         },
         {
@@ -144,12 +45,61 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HG - LCS"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LCS - HG"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CoralBranchScore"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ElevatorHome"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HG - LCS"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Right Start",
+  "folder": "Center Start",
   "choreoAuto": false
 }
