@@ -51,8 +51,8 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
-  private final Coral coral;
-  private final Elevator elevator;
+//   private final Coral coral;
+//   private final Elevator elevator;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -73,10 +73,10 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
-        coral = 
-            new Coral(new CoralIONeo550());
-        elevator =
-            new Elevator(new ElevatorIONeo());
+        // coral = 
+        //     new Coral(new CoralIONeo550());
+        // elevator =
+        //     new Elevator(new ElevatorIONeo());
         break;
 
       default:
@@ -88,35 +88,37 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
-        coral =
-            new Coral(new CoralIO() {});
-        elevator = 
-            new Elevator(new ElevatorIO() {});
+        // coral =
+        //     new Coral(new CoralIO() {});
+        // elevator = 
+        //     new Elevator(new ElevatorIO() {});
         break;
     }
 
     //----- Set up Named Commands -----
     //Elevator Commands
-    NamedCommands.registerCommand("ElevatorHome", 
-        Commands.runOnce(() -> elevator.setPosition(Height.HOME), elevator));
-    NamedCommands.registerCommand("ElevatorL2", 
-        Commands.runOnce(() -> elevator.setPosition(Height.L2), elevator));
-    NamedCommands.registerCommand("ElevatorL3", 
-        Commands.runOnce(() -> elevator.setPosition(Height.L3), elevator));
-    NamedCommands.registerCommand("ElevatorHighAlgae", 
-        Commands.runOnce(() -> elevator.setPosition(Height.HIGH_ALGAE), elevator));
-    NamedCommands.registerCommand("ElevatorLowAlgae", 
-        Commands.runOnce(() -> elevator.setPosition(Height.LOW_ALGAE), elevator));
+    // NamedCommands.registerCommand("ElevatorHome", 
+    //     Commands.runOnce(() -> elevator.setPosition(Height.HOME), elevator));
+    // NamedCommands.registerCommand("ElevatorL2", 
+    //     Commands.runOnce(() -> elevator.setPosition(Height.L2), elevator));
+    // NamedCommands.registerCommand("ElevatorL3", 
+    //     Commands.runOnce(() -> elevator.setPosition(Height.L3), elevator));
+    // NamedCommands.registerCommand("ElevatorHighAlgae", 
+    //     Commands.runOnce(() -> elevator.setPosition(Height.HIGH_ALGAE), elevator));
+    // NamedCommands.registerCommand("ElevatorLowAlgae", 
+    //     Commands.runOnce(() -> elevator.setPosition(Height.LOW_ALGAE), elevator));
     //Scoring Commands
-    NamedCommands.registerCommand("CoralTroughScore",
-        Commands.run(() -> coral.scoreTrough()).withTimeout(0.25));
-    NamedCommands.registerCommand("CoralBranchScore", 
-        Commands.run(() -> coral.scoreCoral()).withTimeout(0.25));
+    // NamedCommands.registerCommand("CoralTroughScore",
+    //     Commands.run(() -> coral.scoreTrough()).withTimeout(0.25));
+    // NamedCommands.registerCommand("CoralBranchScore", 
+    //     Commands.run(() -> coral.scoreCoral()).withTimeout(0.25));
     //Algae Commands
     // NamedCommands.registerCommand("RemoveAlgae", 
-    //     Commands.run(() -> algae.grabAlgae()).withTimeout(2));
-    // NamedCommands.registerCommand("SpitAlgae", 
+    //     Commands.run(() -> algae.extakeAlgae()).withTimeout(2));
+    // NamedCommands.registerCommand("GrabAlgae", 
     //     Commands.run(() -> algae.extakeAlgae()).withTimeout(1));  
+    // NamedCommands.registerCommand("SpitAlgae", 
+    //     Commands.run(() -> algae.extakeAlgae)).withTimeout(1);
 
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
@@ -180,52 +182,52 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-    xDriver
-        .leftBumper()
-        .whileTrue(
-            Commands.startEnd(
-                () -> coral.run(), coral::stop, coral));
+    // xDriver
+    //     .leftBumper()
+    //     .whileTrue(
+    //         Commands.startEnd(
+    //             () -> coral.run(), coral::stop, coral));
 
     //----- CoPilot Button Bindings ------
     //Run elevator to hight for L1 / Coral station
-    coPilot
-        .b()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setPosition(Height.HOME), elevator));
+    // coPilot
+    //     .b()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //                 elevator.setPosition(Height.HOME), elevator));
     
     //Run elevator to height for L2
-    coPilot
-        .a()
-        .onTrue(
-            Commands.run(
-                () ->
-                    elevator.setPosition(Height.L2), elevator));
+    // coPilot
+    //     .a()
+    //     .onTrue(
+    //         Commands.run(
+    //             () ->
+    //                 elevator.setPosition(Height.L2), elevator));
 
     //Run elevator to height for L3
-    coPilot
-        .x()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setPosition(Height.L3), elevator));
+    // coPilot
+    //     .x()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //                 elevator.setPosition(Height.L3), elevator));
     
     //Run elevator to height for Low Algae
-    coPilot
-        .leftBumper()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setPosition(Height.LOW_ALGAE), elevator));
+    // coPilot
+    //     .leftBumper()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //                 elevator.setPosition(Height.LOW_ALGAE), elevator));
       
     //Run elevator to height for High Algae                
-    coPilot
-        .rightBumper()
-        .onTrue(
-            Commands.run(
-                () -> 
-                elevator.setPosition(Height.HIGH_ALGAE), elevator));
+    // coPilot
+    //     .rightBumper()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //             elevator.setPosition(Height.HIGH_ALGAE), elevator));
 
   }
 
