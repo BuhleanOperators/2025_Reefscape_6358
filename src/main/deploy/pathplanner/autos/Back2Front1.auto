@@ -7,7 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LS - IJ"
+            "pathName": "CS - HG"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ElevatorLowAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "RemoveAlgae"
           }
         },
         {
@@ -17,7 +29,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorL2"
+                  "name": "ElevatorL3"
                 }
               },
               {
@@ -38,7 +50,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "IJ - LCS"
+            "pathName": "HG - LCS"
           }
         },
         {
@@ -50,7 +62,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LCS - IJ"
+            "pathName": "LCS - HG"
           }
         },
         {
@@ -60,7 +72,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ElevatorL2"
+                  "name": "ElevatorL3"
                 }
               },
               {
@@ -81,7 +93,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "IJ - LCS"
+            "pathName": "HG - LCS"
           }
         },
         {
@@ -120,17 +132,11 @@
               }
             ]
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "AB - LCS"
-          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Left Start",
+  "folder": "Center Start",
   "choreoAuto": false
 }

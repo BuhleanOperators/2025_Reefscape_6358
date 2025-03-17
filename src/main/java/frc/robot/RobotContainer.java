@@ -116,15 +116,17 @@ public class RobotContainer {
     NamedCommands.registerCommand("ElevatorHighAlgae", 
         Commands.runOnce(() -> elevator.setPosition(Height.HIGH_ALGAE), elevator));
     //Scoring Commands
-    NamedCommands.registerCommand("CoralTroughScore",
-        Commands.run(() -> coral.scoreTrough()).withTimeout(0.25));
-    NamedCommands.registerCommand("CoralBranchScore", 
-        Commands.run(() -> coral.scoreCoral()).withTimeout(0.25));
+    // NamedCommands.registerCommand("CoralTroughScore",
+    //     Commands.run(() -> coral.scoreTrough()).withTimeout(0.25));
+    // NamedCommands.registerCommand("CoralBranchScore", 
+    //     Commands.run(() -> coral.scoreCoral()).withTimeout(0.25));
     //Algae Commands
     // NamedCommands.registerCommand("RemoveAlgae", 
-    //     Commands.run(() -> algae.grabAlgae()).withTimeout(2));
-    // NamedCommands.registerCommand("SpitAlgae", 
+    //     Commands.run(() -> algae.extakeAlgae()).withTimeout(2));
+    // NamedCommands.registerCommand("GrabAlgae", 
     //     Commands.run(() -> algae.extakeAlgae()).withTimeout(1));  
+    // NamedCommands.registerCommand("SpitAlgae", 
+    //     Commands.run(() -> algae.extakeAlgae)).withTimeout(1);
 
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
@@ -196,12 +198,12 @@ public class RobotContainer {
 
     //----- CoPilot Button Bindings ------
     //Run elevator to hight for L1 / Coral station
-    coPilot
-        .b()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setPosition(Height.HOME), elevator));
+    // coPilot
+    //     .b()
+    //     .onTrue(
+    //         Commands.run(
+    //             () -> 
+    //                 elevator.setPosition(Height.HOME), elevator));
     
     //Run elevator to height for L2
     coPilot
