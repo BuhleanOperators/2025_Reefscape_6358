@@ -28,6 +28,9 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants.Height;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.algae.Algae;
+import frc.robot.subsystems.algae.AlgaeIO;
+import frc.robot.subsystems.algae.AlgaeIONeo550;
 import frc.robot.subsystems.coral.Coral;
 import frc.robot.subsystems.coral.CoralIO;
 import frc.robot.subsystems.coral.CoralIONeo550;
@@ -51,8 +54,9 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
-//   private final Coral coral;
-//   private final Elevator elevator;
+  private final Coral coral;
+  private final Elevator elevator;
+  private final Algae algae;
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -73,10 +77,12 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.FrontRight),
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
-        // coral = 
-        //     new Coral(new CoralIONeo550());
-        // elevator =
-        //     new Elevator(new ElevatorIONeo());
+        coral = 
+            new Coral(new CoralIONeo550());
+        elevator =
+            new Elevator(new ElevatorIONeo());
+        algae = 
+            new Algae(new AlgaeIONeo550());
         break;
 
       default:
@@ -88,10 +94,12 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
-        // coral =
-        //     new Coral(new CoralIO() {});
-        // elevator = 
-        //     new Elevator(new ElevatorIO() {});
+        coral =
+            new Coral(new CoralIO() {});
+        elevator = 
+            new Elevator(new ElevatorIO() {});
+        algae = 
+            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -182,13 +190,26 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-    // xDriver
-    //     .leftBumper()
-    //     .whileTrue(
-    //         Commands.startEnd(
-    //             () -> coral.run(), coral::stop, coral));
+    xDriver
+        .rightTrigger(0.75)
+        .whileTrue(
+            Commands.startEnd(
+                () -> coral.run(), coral::stop, coral));
 
-    //----- CoPilot Button Bindings ------
+    //Extake Algea
+    xDriver
+        .leftBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> algae.extakeAlgae(), algae::stop, algae));
+                
+    //Intake Algae
+    xDriver
+        .leftTrigger(0.75)
+        .whileTrue(
+            Commands.startEnd(
+                () -> algae.intakeAlgae(), algae::stop, algae));
+
     //Run elevator to hight for L1 / Coral station
     // coPilot
     //     .b()
@@ -198,12 +219,12 @@ public class RobotContainer {
     //                 elevator.setPosition(Height.HOME), elevator));
     
     //Run elevator to height for L2
-    // coPilot
-    //     .a()
-    //     .onTrue(
-    //         Commands.run(
-    //             () ->
-    //                 elevator.setPosition(Height.L2), elevator));
+    coPilot
+        .y()
+        .onTrue(
+            Commands.run(
+                () ->
+                    elevator.setPosition(Height.L2), elevator));
 
     //Run elevator to height for L3
     // coPilot
@@ -213,21 +234,13 @@ public class RobotContainer {
     //             () -> 
     //                 elevator.setPosition(Height.L3), elevator));
     
-    //Run elevator to height for Low Algae
-    // coPilot
-    //     .leftBumper()
-    //     .onTrue(
-    //         Commands.run(
-    //             () -> 
-    //                 elevator.setPosition(Height.LOW_ALGAE), elevator));
-      
-    //Run elevator to height for High Algae                
-    // coPilot
-    //     .rightBumper()
-    //     .onTrue(
-    //         Commands.run(
-    //             () -> 
-    //             elevator.setPosition(Height.HIGH_ALGAE), elevator));
+    //Run elevator to height for high algae
+    coPilot
+        .rightBumper()
+        .onTrue(
+            Commands.run(
+                () -> 
+                    elevator.setPosition(Height.HIGH_ALGAE), elevator));
 
   }
 
@@ -242,30 +255,33 @@ public class RobotContainer {
 
   public void initPreferences(){
     Preferences.initDouble("L2 Height", 10);
-    Preferences.initDouble("L3 Height", 25.5);
-    Preferences.initDouble("High Algae Height", 25.5);
-    Preferences.initDouble("Low Algae Height", 10);
+    Preferences.initDouble("L3 Height", 24.5);
+    Preferences.initDouble("High Algae Height", 19);
     Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.initDouble("High Algae Height", 24.5);
     Preferences.initDouble("Trough Left Speed", 0.15);
     Preferences.initDouble("Trough Right Speed", 0.45);
+    Preferences.initDouble("Algae Intake Speed", 1.0);
+    Preferences.initDouble("Algae Extake Speed", -1.0);
   }
   public void updatePreferences(){
     Preferences.getDouble("L2 Height", 10);
-    Preferences.getDouble("L3 Height", 25.5);
-    Preferences.getDouble("High Algae Height", 25.5);
-    Preferences.getDouble("Low Algae Height", 10);
-    Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.getDouble("L3 Height", 24.5);
+    Preferences.getDouble("High Algae Height", 19);
     Preferences.getDouble("Trough Left Speed", 0.15);
     Preferences.getDouble("Trough Right Speed", 0.45);
+    Preferences.getDouble("Algae Intake Speed", 1.0);
+    Preferences.getDouble("Algae Extake Speed", -1.0);
 
     Constants.elevatorHeight.L2 = Preferences.getDouble("L2 Height", 10);
-    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 25.5);
-    Constants.elevatorHeight.lowAlgae = Preferences.getDouble("Low Algae Height", 10);
-    Constants.elevatorHeight.highAlgae = Preferences.getDouble("High Algae Height", 25.5);
+    Constants.elevatorHeight.L3 = Preferences.getDouble("L3 Height", 24.5);
+    Constants.elevatorHeight.highAlgae = Preferences.getDouble("High Algae Height", 19);
 
     Constants.coralSpeed.speed = Preferences.getDouble("L2 & L3 Scoring Speed", 0.45);
     Constants.coralSpeed.troughLeft = Preferences.getDouble("Trough Left Speed", 0.15);
     Constants.coralSpeed.troughRight = Preferences.getDouble("Trough Right Speed", 0.45);
 
+    Constants.algaeSpeed.intakeSpeed = Preferences.getDouble("Algae Intake Speed", 1.0);
+    Constants.algaeSpeed.extakeSpeed = Preferences.getDouble("Algae Extake Speed", -1.0);
   }
 }

@@ -88,10 +88,6 @@ public class ElevatorIONeo implements ElevatorIO{
                 Constants.currentHeight = Height.L3;
                 break;
 
-            case LOW_ALGAE:
-                controller.setReference(elevatorHeight.lowAlgae, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
-                Constants.currentHeight = Height.LOW_ALGAE;
-                break;
             case HIGH_ALGAE:
                 controller.setReference(elevatorHeight.highAlgae, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
                 Constants.currentHeight = Height.HIGH_ALGAE;
