@@ -220,7 +220,7 @@ public class RobotContainer {
 
     //Extake Algea
     xDriver
-        .leftBumper()
+        .rightTrigger(0.75)
         .whileTrue(
             Commands.startEnd(
                 () -> algae.extakeAlgae(), algae::stop, algae));
@@ -298,6 +298,7 @@ public class RobotContainer {
     Preferences.initDouble("L3 Height", 24.5);
     Preferences.initDouble("High Algae Height", 19);
     Preferences.initDouble("L2 & L3 Scoring Speed", 0.45);
+    Preferences.initDouble("High Algae Height", 24.5);
     Preferences.initDouble("Trough Left Speed", 0.15);
     Preferences.initDouble("Trough Right Speed", 0.45);
     Preferences.initDouble("Coral Reverse Speed", 0.1);
