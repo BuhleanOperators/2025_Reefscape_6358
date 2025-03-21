@@ -27,7 +27,7 @@ public class AlgaeIONeo550 implements AlgaeIO{
 
     public AlgaeIONeo550(){
         config
-            .inverted(false)
+            .inverted(true)
             .idleMode(IdleMode.kBrake)
             .smartCurrentLimit(30)
             .voltageCompensation(12.0);

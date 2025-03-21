@@ -36,7 +36,7 @@ public class CoralIONeo550 implements CoralIO{
 
     public CoralIONeo550(){
         leftConfig
-            .inverted(true)
+            .inverted(false)
             .idleMode(IdleMode.kBrake)
             .smartCurrentLimit(20)
             .voltageCompensation(12.0);
@@ -49,7 +49,7 @@ public class CoralIONeo550 implements CoralIO{
             .outputRange(-1, 1); //TODO Change to fit with gear ratio
 
         rightConfig
-            .inverted(false)
+            .inverted(true)
             .idleMode(IdleMode.kBrake)
             .smartCurrentLimit(20)
             .voltageCompensation(12.0);
