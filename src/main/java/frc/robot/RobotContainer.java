@@ -196,7 +196,20 @@ public class RobotContainer {
             Commands.startEnd(
                 () -> coral.run(), coral::stop, coral));
 
-    //----- CoPilot Button Bindings ------
+    //Extake Algea
+    xDriver
+        .leftBumper()
+        .whileTrue(
+            Commands.startEnd(
+                () -> algae.extakeAlgae(), algae::stop, algae));
+                
+    //Intake Algae
+    xDriver
+        .leftTrigger(0.75)
+        .whileTrue(
+            Commands.startEnd(
+                () -> algae.intakeAlgae(), algae::stop, algae));
+
     //Run elevator to hight for L1 / Coral station
     // coPilot
     //     .b()

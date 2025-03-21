@@ -25,7 +25,8 @@ public final class Constants {
   public enum Height {
     HOME,
     L2,
-    L3
+    L3, 
+    HIGH_ALGAE
   }
 
   public enum AlgaeDirection {
@@ -36,9 +37,8 @@ public final class Constants {
   public class elevatorHeight{
     public static double L1 = 0;
     public static double L2 = 8;
-    public static double L3 = 16;
-    public static double lowAlgae = 0;
-    public static double highAlgae = 0;
+    public static double L3 = 24.5;
+    public static double highAlgae = 19;
   }
 
   public class coralSpeed{
