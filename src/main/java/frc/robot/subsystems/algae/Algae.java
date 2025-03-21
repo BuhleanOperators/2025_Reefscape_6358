@@ -36,11 +36,11 @@ public class Algae extends SubsystemBase {
   }
 
   /** Grab the algea */
-  public void grabAlgae(){
+  public void intakeAlgae(){
     io.setSpeed(algaeSpeed.intakeSpeed);//TODO Set speed needed to grab algae
   }
 
-  /** Oextake the algea */
+  /** Extake the algea */
   public void extakeAlgae(){
     io.setSpeed(algaeSpeed.extakeSpeed);//TODO Set speed needed to eject algae
   }
@@ -53,7 +53,7 @@ public class Algae extends SubsystemBase {
   public void run(){
     switch (Constants.currentDirection){
       case INTAKE:
-        grabAlgae();
+        intakeAlgae();
         Constants.currentDirection = AlgaeDirection.EXTAKE;
         break;
       case EXTAKE:

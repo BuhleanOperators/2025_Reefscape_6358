@@ -20,10 +20,8 @@ import edu.wpi.first.math.filter.Debouncer;
 
 /** Add your docs here. */
 public class AlgaeIONeo550 implements AlgaeIO{
-    private SparkMax neo550 = new SparkMax(0, MotorType.kBrushless); //TODO Change motor ID
+    private SparkMax neo550 = new SparkMax(54, MotorType.kBrushed); //TODO Change motor ID
     private SparkMaxConfig config = new SparkMaxConfig();
-    private SparkClosedLoopController controller = neo550.getClosedLoopController();
-    private RelativeEncoder encoder = neo550.getEncoder();
 
     private Debouncer motorConnectedDebouncer;
 
@@ -31,15 +29,8 @@ public class AlgaeIONeo550 implements AlgaeIO{
         config
             .inverted(false)
             .idleMode(IdleMode.kBrake)
-            .smartCurrentLimit(20)
+            .smartCurrentLimit(30)
             .voltageCompensation(12.0);
-        config.encoder
-            .positionConversionFactor(1.0)
-            .velocityConversionFactor(1.0);
-        config.closedLoop
-            .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-            .pid(1.0, 1.0, 1.0)
-            .outputRange(-1, 1);
         
         neo550.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -49,19 +40,11 @@ public class AlgaeIONeo550 implements AlgaeIO{
     @Override
     public void updateInputs(AlgaeIOInputs inputs){
         inputs.isConnected = motorConnectedDebouncer.calculate(neo550.getLastError() == REVLibError.kOk);
-        inputs.velocityRotPerSec = encoder.getVelocity();
-        inputs.appliedVolts = neo550.getBusVoltage();
-        inputs.currentAmps = neo550.getOutputCurrent();
     }
 
     @Override
     public void setSpeed(double speed){
         neo550.set(speed);
-    }
-
-    @Override
-    public void setVelocity(double velocity){
-        controller.setReference(velocity, ControlType.kVelocity);
     }
 
     @Override

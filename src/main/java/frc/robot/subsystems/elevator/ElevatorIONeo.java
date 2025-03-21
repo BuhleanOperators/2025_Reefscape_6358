@@ -26,7 +26,7 @@ import frc.robot.Constants.elevatorHeight;
 /** Add your docs here. */
 public class ElevatorIONeo implements ElevatorIO{
     //4:1 gearbox
-    private final SparkMax neo = new SparkMax(6, MotorType.kBrushless); 
+    private final SparkMax neo = new SparkMax(51, MotorType.kBrushless); 
     private final SparkMaxConfig config = new SparkMaxConfig();
     private final RelativeEncoder encoder = neo.getEncoder();
 
@@ -86,6 +86,16 @@ public class ElevatorIONeo implements ElevatorIO{
             case L3:
                 controller.setReference(elevatorHeight.L3, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
                 Constants.currentHeight = Height.L3;
+                break;
+
+            case LOW_ALGAE:
+                controller.setReference(elevatorHeight.lowAlgae, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = Height.LOW_ALGAE;
+                break;
+
+            case HIGH_ALGAE:
+                controller.setReference(elevatorHeight.highAlgae, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
+                Constants.currentHeight = Height.HIGH_ALGAE;
                 break;
 
             default:

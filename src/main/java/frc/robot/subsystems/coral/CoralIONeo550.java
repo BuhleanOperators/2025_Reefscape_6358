@@ -19,8 +19,8 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.math.filter.Debouncer;
 
 public class CoralIONeo550 implements CoralIO{
-    private SparkMax leftNeo550 = new SparkMax(8, MotorType.kBrushless); //TODO Change motor IDs
-    private SparkMax rightNeo550 = new SparkMax(7, MotorType.kBrushless);
+    private SparkMax leftNeo550 = new SparkMax(52, MotorType.kBrushless); //TODO Change motor IDs
+    private SparkMax rightNeo550 = new SparkMax(53, MotorType.kBrushless);
 
     private SparkMaxConfig leftConfig = new SparkMaxConfig();
     private SparkMaxConfig rightConfig = new SparkMaxConfig();
