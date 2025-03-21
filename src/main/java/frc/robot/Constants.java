@@ -27,9 +27,7 @@ public final class Constants {
   public enum Height {
     HOME,
     L2,
-    L3,
-    HIGH_ALGAE,
-    LOW_ALGAE
+    L3
   }
 
   public enum AlgaeDirection {
