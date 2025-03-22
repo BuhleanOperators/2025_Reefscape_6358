@@ -26,7 +26,7 @@ import frc.robot.Constants.elevatorHeight;
 /** Add your docs here. */
 public class ElevatorIONeo implements ElevatorIO{
     //4:1 gearbox
-    private final SparkMax neo = new SparkMax(6, MotorType.kBrushless); 
+    private final SparkMax neo = new SparkMax(51, MotorType.kBrushless); 
     private final SparkMaxConfig config = new SparkMaxConfig();
     private final RelativeEncoder encoder = neo.getEncoder();
 
