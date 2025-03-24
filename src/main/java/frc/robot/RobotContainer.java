@@ -16,12 +16,15 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants.Height;
 import frc.robot.commands.DriveCommands;
@@ -40,6 +43,7 @@ import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIONeo;
+import frc.robot.subsystems.led.Led;
 
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
@@ -54,7 +58,7 @@ public class RobotContainer {
   private final Drive drive;
   private final Coral coral;
   private final Elevator elevator;
-  private final Algae algae;
+  private final Led leds = Led.getInstance();
 
   // Controller
   private final CommandXboxController xDriver = new CommandXboxController(0);
@@ -79,8 +83,6 @@ public class RobotContainer {
             new Coral(new CoralIONeo550());
         elevator =
             new Elevator(new ElevatorIONeo());
-        algae = 
-            new Algae(new AlgaeIONeo550());
         break;
 
       default:
@@ -96,8 +98,6 @@ public class RobotContainer {
             new Coral(new CoralIO() {});
         elevator = 
             new Elevator(new ElevatorIO() {});
-        algae = 
-            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -139,36 +139,27 @@ public class RobotContainer {
             () -> -xDriver.getLeftX(),
             () -> -xDriver.getRightX()));
 
-    // Lock to 0° when A button is held
-    xDriver
-        .a()
-        .whileTrue(
-            DriveCommands.joystickDriveAtAngle(
-                drive,
-                () -> -xDriver.getLeftY(),
-                () -> -xDriver.getLeftX(),
-                () -> new Rotation2d()));
 
     //Run coral manipulater            
     xDriver
-        .rightTrigger(0.75)
+        .leftBumper()
         .whileTrue(
             Commands.startEnd(
                 () -> coral.run(), coral::stop, coral));
 
     //Extake Algea
-    xDriver
-        .leftBumper()
-        .whileTrue(
-            Commands.startEnd(
-                () -> algae.extakeAlgae(), algae::stop, algae));
+    // xDriver
+    //     .leftBumper()
+    //     .whileTrue(
+    //         Commands.startEnd(
+    //             () -> algae.extakeAlgae(), algae::stop, algae));
                 
     //Intake Algae
-    xDriver
-        .leftTrigger(0.75)
-        .whileTrue(
-            Commands.startEnd(
-                () -> algae.intakeAlgae(), algae::stop, algae));
+    // xDriver
+    //     .leftTrigger(0.75)
+    //     .whileTrue(
+    //         Commands.startEnd(
+    //             () -> algae.intakeAlgae(), algae::stop, algae));
 
     //Run elevator to hight for L1 / Coral station
     coPilot
@@ -180,7 +171,7 @@ public class RobotContainer {
     
     //Run elevator to height for L2
     coPilot
-        .y()
+        .a()
         .onTrue(
             Commands.run(
                 () ->
@@ -193,15 +184,16 @@ public class RobotContainer {
             Commands.run(
                 () -> 
                     elevator.setPosition(Height.L3), elevator));
-    
-    //Run elevator to height for high algae
-    coPilot
-        .rightBumper()
-        .onTrue(
-            Commands.run(
-                () -> 
-                    elevator.setPosition(Height.HIGH_ALGAE), elevator));
 
+    new Trigger(
+        () -> 
+            DriverStation.isTeleopEnabled()
+                && DriverStation.getMatchTime() >0
+                && DriverStation.getMatchTime() <= Math.round(15.0))
+        .onTrue(
+            controllerRumbleCommand().withTimeout(0.5)
+            .beforeStarting(() -> leds.endgameAlert = true)
+            .finallyDo(() -> leds.endgameAlert = false));
   }
 
   /**
@@ -210,7 +202,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autoChooser.get();
+    // return autoChooser.get();
+    return null;
   }
 
   public void initPreferences(){
@@ -243,5 +236,18 @@ public class RobotContainer {
 
     Constants.algaeSpeed.intakeSpeed = Preferences.getDouble("Algae Intake Speed", 1.0);
     Constants.algaeSpeed.extakeSpeed = Preferences.getDouble("Algae Extake Speed", -1.0);
+  }
+
+  // Creates controller rumble command
+  private Command controllerRumbleCommand() {
+    return Commands.startEnd(
+        () -> {
+          xDriver.getHID().setRumble(RumbleType.kBothRumble, 1.0);
+          coPilot.getHID().setRumble(RumbleType.kBothRumble, 1.0);
+        },
+        () -> {
+          xDriver.getHID().setRumble(RumbleType.kBothRumble, 0.0);
+          coPilot.getHID().setRumble(RumbleType.kBothRumble, 0.0);
+        });
   }
 }

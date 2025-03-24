@@ -16,10 +16,17 @@ package frc.robot;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.DriveMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
+
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Threads;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.led.Led;
+import frc.robot.util.VirtualSubsystem;
+
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -37,7 +44,12 @@ public class Robot extends LoggedRobot {
   private Command autonomousCommand;
   private RobotContainer robotContainer;
 
+
+  private final Alert lowBatteryAlert = new Alert(
+    "Battery voltage is low. Consider turning off the root or replacing the battery.", AlertType.kError);
   public Robot() {
+    Led.getInstance();
+    
     // Record metadata
     Logger.recordMetadata("ProjectName", BuildConstants.MAVEN_NAME);
     Logger.recordMetadata("BuildDate", BuildConstants.BUILD_DATE);
@@ -104,12 +116,19 @@ public class Robot extends LoggedRobot {
     // Switch thread to high priority to improve loop timing
     Threads.setCurrentThreadPriority(true, 99);
 
+    VirtualSubsystem.periodicAll();
+
     // Runs the Scheduler. This is responsible for polling buttons, adding
     // newly-scheduled commands, running already-scheduled commands, removing
     // finished or interrupted commands, and running subsystem periodic() methods.
     // This must be called from the robot's periodic block in order for anything in
     // the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+    if (RobotController.getBatteryVoltage() <= 11.8){
+      lowBatteryAlert.set(true);
+      Led.getInstance().lowBatteryAlert = true;
+    }
 
     // Return to normal thread priority
     Threads.setCurrentThreadPriority(false, 10);
