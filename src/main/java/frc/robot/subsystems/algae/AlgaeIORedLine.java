@@ -15,13 +15,13 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.math.filter.Debouncer;
 
 /** Add your docs here. */
-public class AlgaeIONeo550 implements AlgaeIO{
+public class AlgaeIORedLine implements AlgaeIO{
     private SparkMax neo550 = new SparkMax(54, MotorType.kBrushed); //TODO Change motor ID
     private SparkMaxConfig config = new SparkMaxConfig();
 
     private Debouncer motorConnectedDebouncer;
 
-    public AlgaeIONeo550(){
+    public AlgaeIORedLine(){
         config
             .inverted(true)
             .idleMode(IdleMode.kBrake)
