@@ -90,8 +90,6 @@ public class RobotContainer {
             new Coral(new CoralIONeo550());
         elevator =
             new Elevator(new ElevatorIONeo());
-        algae = 
-            new Algae(new AlgaeIONeo550());
         break;
 
       default:
@@ -107,8 +105,6 @@ public class RobotContainer {
             new Coral(new CoralIO() {});
         elevator = 
             new Elevator(new ElevatorIO() {});
-        algae = 
-            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -207,7 +203,7 @@ public class RobotContainer {
 
     //Run coral manipulater            
     xDriver
-        .rightTrigger(0.75)
+        .leftBumper()
         .whileTrue(
             Commands.startEnd(
                 () -> coral.run(), coral::stop, coral));
@@ -251,7 +247,7 @@ public class RobotContainer {
     
     //Run elevator to height for L2
     coPilot
-        .y()
+        .a()
         .onTrue(
             Commands.run(
                 () ->
