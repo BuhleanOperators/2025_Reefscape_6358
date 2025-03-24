@@ -49,8 +49,6 @@ import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIONeo;
 import frc.robot.subsystems.led.Led;
 
-import java.util.stream.Stream;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -107,8 +105,6 @@ public class RobotContainer {
             new Coral(new CoralIO() {});
         elevator = 
             new Elevator(new ElevatorIO() {});
-        algae = 
-            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -251,7 +247,7 @@ public class RobotContainer {
     
     //Run elevator to height for L2
     coPilot
-        .y()
+        .a()
         .onTrue(
             Commands.run(
                 () ->
