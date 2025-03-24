@@ -35,7 +35,7 @@ import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.algae.Algae;
 import frc.robot.subsystems.algae.AlgaeIO;
-import frc.robot.subsystems.algae.AlgaeIONeo550;
+import frc.robot.subsystems.algae.AlgaeIORedLine;
 import frc.robot.subsystems.coral.Coral;
 import frc.robot.subsystems.coral.CoralIO;
 import frc.robot.subsystems.coral.CoralIONeo550;
@@ -90,6 +90,8 @@ public class RobotContainer {
             new Coral(new CoralIONeo550());
         elevator =
             new Elevator(new ElevatorIONeo());
+        algae = 
+            new Algae(new AlgaeIORedLine());
         break;
 
       default:
@@ -105,6 +107,8 @@ public class RobotContainer {
             new Coral(new CoralIO() {});
         elevator = 
             new Elevator(new ElevatorIO() {});
+        algae = 
+            new Algae(new AlgaeIO() {});
         break;
     }
 
@@ -272,7 +276,7 @@ public class RobotContainer {
     new Trigger(
         () -> 
             DriverStation.isTeleopEnabled()
-                && DriverStation.getMatchTime() >0
+                && DriverStation.getMatchTime() > 0
                 && DriverStation.getMatchTime() <= Math.round(15.0))
         .onTrue(
             controllerRumbleCommand().withTimeout(0.5)
