@@ -1,0 +1,55 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CS - HG"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CoralTroughScore"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GrabAlgae"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HG - Back"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "EjectAlgae"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Sabatoge Back Away"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Center Start",
+  "choreoAuto": false
+}

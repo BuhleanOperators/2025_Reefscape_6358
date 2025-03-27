@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.975715755208333,
-        "y": 1.5968977864583325
+        "x": 6.119563427510622,
+        "y": 4.070294239779305
       },
       "isLocked": false,
       "linkedName": "Reef - HG"
     },
     {
       "anchor": {
-        "x": 1.4815509259259247,
-        "y": 0.8479752604166663
+        "x": 7.777950665509259,
+        "y": 4.376838107638888
       },
       "prevControl": {
-        "x": 3.000279462331621,
-        "y": 2.0002328670410283
+        "x": 6.83775269971477,
+        "y": 4.206977714380562
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Coral Station - Right"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 55.0
+    "rotation": -132.9625590793506
   },
   "reversed": false,
   "folder": null,

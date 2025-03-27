@@ -50,18 +50,7 @@ public class Algae extends SubsystemBase {
     io.stop();
   }
 
-  public void run(){
-    switch (Constants.currentDirection){
-      case INTAKE:
-        intakeAlgae();
-        Constants.currentDirection = AlgaeDirection.EXTAKE;
-        break;
-      case EXTAKE:
-        extakeAlgae();
-        Constants.currentDirection = AlgaeDirection.INTAKE;
-        break;
-      default:
-        break;
-    }
+  public void holdAlgae(){
+    io.setSpeed(0.5);
   }
 }

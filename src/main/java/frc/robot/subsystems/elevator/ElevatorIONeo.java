@@ -22,6 +22,7 @@ import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 import frc.robot.Constants.Height;
 import frc.robot.Constants.elevatorHeight;
+import frc.robot.subsystems.led.Led;
 
 /** Add your docs here. */
 public class ElevatorIONeo implements ElevatorIO{
@@ -76,21 +77,29 @@ public class ElevatorIONeo implements ElevatorIO{
             case HOME:
                 controller.setReference(elevatorHeight.L1, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
                 Constants.currentHeight = Height.HOME;
+                Led.getInstance().coralHeight = false;
+                Led.getInstance().algaeHeight = false;
                 break;
             
             case L2:
                 controller.setReference(elevatorHeight.L2, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
                 Constants.currentHeight = Height.L2;
+                Led.getInstance().coralHeight = true;
+                Led.getInstance().algaeHeight = false;
                 break;
         
             case L3:
                 controller.setReference(elevatorHeight.L3, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
                 Constants.currentHeight = Height.L3;
+                Led.getInstance().coralHeight = true;
+                Led.getInstance().algaeHeight = false;
                 break;
             
             case HIGH_ALGAE:
                 controller.setReference(elevatorHeight.highAlgae, ControlType.kMAXMotionPositionControl, ClosedLoopSlot.kSlot0, 0.8);
                 Constants.currentHeight = Height.HIGH_ALGAE;
+                Led.getInstance().coralHeight = false;
+                Led.getInstance().algaeHeight = true;
                 break;
 
             default:
