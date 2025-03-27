@@ -18,7 +18,6 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.DriveMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
 import com.pathplanner.lib.commands.FollowPathCommand;
 
-
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.RobotController;
@@ -48,7 +47,6 @@ public class Robot extends LoggedRobot {
 
   private final Alert lowBatteryAlert = new Alert(
     "Battery voltage is low. Consider turning off the root or replacing the battery.", AlertType.kError);
-
   public Robot() {
     Led.getInstance();
     

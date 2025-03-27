@@ -48,8 +48,6 @@ import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIONeo;
 import frc.robot.subsystems.led.Led;
 
-import java.util.stream.Stream;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -192,7 +190,6 @@ public class RobotContainer {
             () -> -xDriver.getLeftY(),
             () -> -xDriver.getLeftX(),
             () -> -xDriver.getRightX()));
-
     //----- Driver Button Bindings -----
     // Lock to 0° when A button is held
     xDriver
@@ -239,7 +236,6 @@ public class RobotContainer {
             Commands.startEnd(
                 () -> leds.hpAttentionAlert = true, () -> leds.hpAttentionAlert = false));
 
-    //----- CoPilot Controls -----
     //Run elevator to hight for L1 / Coral station
     coPilot
         .b()
@@ -290,7 +286,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autoChooser.get();
-    // return null;
   }
 
   public void initPreferences(){
@@ -313,6 +308,8 @@ public class RobotContainer {
     Preferences.getDouble("Trough Left Speed", 0.15);
     Preferences.getDouble("Trough Right Speed", 0.45);
     Preferences.getDouble("Coral Reverse Speed", 0.1);
+    Preferences.getDouble("Trough Left Speed", 0.15);
+    Preferences.getDouble("Trough Right Speed", 0.45);
     Preferences.getDouble("Algae Intake Speed", 1.0);
     Preferences.getDouble("Algae Extake Speed", -1.0);
 
@@ -328,7 +325,6 @@ public class RobotContainer {
     Constants.algaeSpeed.intakeSpeed = Preferences.getDouble("Algae Intake Speed", 1.0);
     Constants.algaeSpeed.extakeSpeed = Preferences.getDouble("Algae Extake Speed", -1.0);
   }
-
   // Creates controller rumble command
   private Command controllerRumbleCommand() {
     return Commands.startEnd(

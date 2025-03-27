@@ -53,4 +53,9 @@ public final class Constants {
     public static double intakeSpeed = 1.0;
     public static double extakeSpeed = -1.0;
   }
+
+  public class algaeSpeed{
+    public static double intakeSpeed = 1.0;
+    public static double extakeSpeed = -1.0;
+  }
 }
