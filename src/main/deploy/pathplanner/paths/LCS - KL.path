@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.169135923032406,
-        "y": 7.004734519675926
+        "x": 0.9684053840579345,
+        "y": 7.006306644193879
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.954847312120577,
-        "y": 6.4684195416008485
+        "x": 1.7541167731461054,
+        "y": 6.469991666118801
       },
       "isLocked": false,
       "linkedName": "Coral Station - Left"
     },
     {
       "anchor": {
-        "x": 3.8143272569444435,
-        "y": 5.1566818576388895
+        "x": 3.8646622094541296,
+        "y": 5.113245919783191
       },
       "prevControl": {
-        "x": 3.257502367560133,
-        "y": 5.519138736465294
+        "x": 3.3078373200698192,
+        "y": 5.475702798609595
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -55.0
+    "rotation": -52.9599540574696
   },
   "useDefaultConstraints": true
 }

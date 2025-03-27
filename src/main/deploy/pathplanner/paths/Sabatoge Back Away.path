@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.1871480758101844,
-        "y": 5.157962962962963
+        "x": 6.987566912608972,
+        "y": 4.725473451972364
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.188312717013888,
-        "y": 5.41849320023148
+        "x": 7.280979652951093,
+        "y": 4.732512776574827
       },
       "isLocked": false,
-      "linkedName": "Reef - IJ"
+      "linkedName": "Sabatoge - Back"
     },
     {
       "anchor": {
-        "x": 1.169135923032406,
-        "y": 7.004734519675926
+        "x": 6.160788122106481,
+        "y": 4.725473451972364
       },
       "prevControl": {
-        "x": 0.9520249693974719,
-        "y": 7.128681418837339
+        "x": 5.790225629402494,
+        "y": 4.729082539557085
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Coral Station - Left"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -55.0
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": 4.035773435039341
   },
   "useDefaultConstraints": true
 }

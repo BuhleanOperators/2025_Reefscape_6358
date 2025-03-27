@@ -1,0 +1,121 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LS - J"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ElevatorL2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CoralBranchScore"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ElevatorHome"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "J - LCS"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LCS - I"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ElevatorL2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CoralBranchScore"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ElevatorHome"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CoralTroughScore"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "I - LCS"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LCS - KL"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CoralTroughScore"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Left Start",
+  "choreoAuto": false
+}
