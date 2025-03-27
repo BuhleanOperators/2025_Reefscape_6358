@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.2898,
+        "y": 4.070304542824074
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.729606051762297,
+        "y": 4.084915208230364
+      },
+      "isLocked": false,
+      "linkedName": "Start - Center"
+    },
+    {
+      "anchor": {
+        "x": 5.7404,
+        "y": 4.060346860532407
+      },
+      "prevControl": {
+        "x": 5.490464696503948,
+        "y": 4.054659676137959
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Reef - HG"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "RunAlgae",
+      "waypointRelativePos": 0.6284650124584724,
+      "endWaypointRelativePos": 1,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

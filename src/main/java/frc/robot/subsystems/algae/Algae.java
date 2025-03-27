@@ -47,4 +47,8 @@ public class Algae extends SubsystemBase {
   public void stop(){
     io.stop();
   }
+
+  public void holdAlgae(){
+    io.setSpeed(0.5);
+  }
 }

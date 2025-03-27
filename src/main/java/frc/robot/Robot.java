@@ -16,6 +16,7 @@ package frc.robot;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.DriveMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
+import com.pathplanner.lib.commands.FollowPathCommand;
 
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
@@ -43,7 +44,6 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 public class Robot extends LoggedRobot {
   private Command autonomousCommand;
   private RobotContainer robotContainer;
-
 
   private final Alert lowBatteryAlert = new Alert(
     "Battery voltage is low. Consider turning off the root or replacing the battery.", AlertType.kError);
@@ -108,6 +108,7 @@ public class Robot extends LoggedRobot {
     // and put our autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
     robotContainer.initPreferences();
+    FollowPathCommand.warmupCommand().schedule();
   }
 
   /** This function is called periodically during all modes. */
@@ -125,9 +126,12 @@ public class Robot extends LoggedRobot {
     // the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    if (RobotController.getBatteryVoltage() <= 11.8){
+    if (RobotController.getBatteryVoltage() <= 11.9){
       lowBatteryAlert.set(true);
       Led.getInstance().lowBatteryAlert = true;
+    } else {
+      lowBatteryAlert.set(false);
+      Led.getInstance().lowBatteryAlert = false;
     }
 
     // Return to normal thread priority

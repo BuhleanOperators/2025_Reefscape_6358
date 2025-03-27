@@ -65,4 +65,12 @@ public class Coral extends SubsystemBase {
         break;
     }
   }
+
+  public void reverse(){
+    io.setSpeed(Constants.coralSpeed.reverseSpeed);
+  }
+
+  public void setSpeeds(double leftSpeed, double rightSpeed){
+    io.setSpeed(leftSpeed, rightSpeed);
+  }
 }

@@ -37,7 +37,7 @@ public class Led extends VirtualSubsystem {
   public boolean coralHeight = false;
   public boolean algaeHeight = false;
   public boolean test = false;
-  private Color orange = new Color("#FF2000");
+  private Color orange = new Color("#FA2000"); //FF2000
 
   private Optional<Alliance> alliance = Optional.empty();
   private Color disabledColor = orange;
@@ -53,7 +53,7 @@ public class Led extends VirtualSubsystem {
 
   // Constants
   private static final boolean prideLeds = false;
-  private static final int length = 295;
+  private static final int length = 300;
   private static final Section fullSection = new Section(0, length);
   private static final Section topSection = new Section(length / 2, length);
   private static final Section bottomSection = new Section(0, length / 2);
@@ -64,7 +64,7 @@ public class Led extends VirtualSubsystem {
   private static final double strobeDuration = 0.1;
   private static final double slowStrobeDuration = 0.3;
   private static final double breathFastDuration = 0.5;
-  private static final double breathSlowDuration = 1.0;
+  private static final double breathSlowDuration = 3.0;
   private static final double rainbowCycleLength = 25.0;
   private static final double rainbowDuration = 0.25;
   private static final double rainbowStrobeDuration = 0.2;
@@ -134,13 +134,13 @@ public class Led extends VirtualSubsystem {
             new Section(
                 0,
                 (int) (length * (1 - ((Timer.getTimestamp() - lastEnabledTime) / autoFadeTime)))),
-            Color.kDarkOrange,
-            Color.kBlue,
+            orange,
+            Color.kDimGray,
             waveFastCycleLength,
             waveFastDuration);
       } else if (lowBatteryAlert) {
         // Low battery
-        breath(fullSection, Color.kRed, Color.kBlack, breathFastDuration, breathFastDuration);
+        breath(fullSection, Color.kRed, Color.kBlack, breathFastDuration, Timer.getFPGATimestamp());
       } else if (prideLeds) {
         // Pride stripes
         stripes(
@@ -172,7 +172,7 @@ public class Led extends VirtualSubsystem {
       }
 
     } else if (DriverStation.isAutonomous()) {
-        wave(fullSection, Color.kDarkOrange, Color.kDimGray, waveFastCycleLength, waveFastDuration);
+        wave(fullSection, orange, Color.kDimGray, waveFastCycleLength, waveFastDuration);
     } else {
         solid(fullSection, orange);
     }
@@ -184,7 +184,7 @@ public class Led extends VirtualSubsystem {
 
       // Endgame alert
       if (endgameAlert) {
-        strobe(fullSection, Color.kRed, orange, slowStrobeDuration);
+        strobe(fullSection, Color.kWhite, orange, slowStrobeDuration);
       }
 
       //Coral height
