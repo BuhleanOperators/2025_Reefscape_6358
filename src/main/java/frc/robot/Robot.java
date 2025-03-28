@@ -131,10 +131,7 @@ public class Robot extends LoggedRobot {
     if (RobotController.getBatteryVoltage() <= 11.9){
       lowBatteryAlert.set(true);
       Led.getInstance().lowBatteryAlert = true;
-    } else {
-      lowBatteryAlert.set(false);
-      Led.getInstance().lowBatteryAlert = false;
-    }
+    } 
 
     // Return to normal thread priority
     Threads.setCurrentThreadPriority(false, 10);
