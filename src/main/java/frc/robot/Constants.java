@@ -13,7 +13,7 @@ public final class Constants {
   public static final Mode currentMode = Mode.REAL;
   public static Height currentHeight = Height.HOME;
   public static AlgaeDirection currentDirection = AlgaeDirection.INTAKE;
-  public static boolean isCompetition = false; //TODO change comp mode
+  public static boolean isCompetition = true; //TODO change comp mode
 
   public enum Mode {
     /** Running on a real robot. */
@@ -47,11 +47,6 @@ public final class Constants {
     public static double troughRight = 0.45;
     public static double speed = 0.45;
     public static double reverseSpeed = 0.1;
-  }
-
-  public class algaeSpeed{
-    public static double intakeSpeed = 1.0;
-    public static double extakeSpeed = -1.0;
   }
 
   public class algaeSpeed{
