@@ -164,9 +164,12 @@ public class RobotContainer {
     autoChooser.addOption(
         "RightL2L2", new PathPlannerAuto("LeftL2L2", true));
     autoChooser.addOption(
-            "LeftL2L1L1", new PathPlannerAuto("LeftL2L1L1"));
+        "LeftL2L1L1", new PathPlannerAuto("LeftL2L1L1"));
     autoChooser.addOption(
-            "RightL2L1L1", new PathPlannerAuto("LeftL2L1L1", true));
+        "RightL2L1L1", new PathPlannerAuto("LeftL2L1L1", true));
+    autoChooser.addOption(
+        "Sabotage", new PathPlannerAuto("Sabotage"));
+    
 
     // Configure the button bindings
     configureButtonBindings();
