@@ -13,7 +13,7 @@ public final class Constants {
   public static final Mode currentMode = Mode.REAL;
   public static Height currentHeight = Height.HOME;
   public static AlgaeDirection currentDirection = AlgaeDirection.INTAKE;
-  public static boolean isCompetition = false; //TODO change comp mode
+  public static boolean isCompetition = true; //TODO change comp mode
 
   public enum Mode {
     /** Running on a real robot. */
